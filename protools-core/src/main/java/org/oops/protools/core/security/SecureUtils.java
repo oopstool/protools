@@ -35,7 +35,7 @@ public class SecureUtils {
         throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
         messageDigest.update(source.getBytes(StandardCharsets.UTF_8));
-        // TODO 加盐
+        // TODO 加盐规则
         messageDigest.update("ahkq1".getBytes(StandardCharsets.UTF_8));
         // 加密
         byte[] digest = messageDigest.digest();
