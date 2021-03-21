@@ -7,3 +7,33 @@
 *.iml
 out
 gen
+*.ipr
+*.iws
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Maven
+target/
+dependency-reduced-pom.xml
+pom.xml.versionsBackup
+.factorypath
+
+# Gradle
+.gradle/
+build/
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+.jython_cache/
+
+# system ignore
+.DS_Store
+Thumbs.db
+
