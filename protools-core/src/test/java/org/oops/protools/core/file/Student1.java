@@ -11,6 +11,7 @@ import com.alibaba.excel.annotation.format.NumberFormat;
  * @since : 2021/3/17
  */
 public class Student1 {
+
     @ExcelProperty("姓名")
     private String name;
 

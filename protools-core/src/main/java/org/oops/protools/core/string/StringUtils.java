@@ -1,5 +1,6 @@
 package org.oops.protools.core.string;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 
 /**
@@ -142,6 +143,30 @@ public class StringUtils {
      */
     public static String padEnd(String string, int minLength, char padChar) {
         return Strings.padEnd(string,minLength,padChar);
+    }
+
+    /**
+     * <p>如果string的长度小于minLength，在string后添加padChar，直到字符串长度为minLength。</p><br>
+     *
+     * <p>例：</p>
+     * <ul>
+     *     <li>{@code StringUtils.padEnd("4.", 5, '0') returns "4.000"}</li>
+     *     <li>{@code StringUtils.padEnd("2010", 3, '!') returns "2010"}</li>
+     * </ul>
+     *<p>该方法与 {@link #padStart(String, int, char)} 方法用法相同不过是往字符串后边追加。</p>
+     *
+     * @param string 目标字符串
+     * @param minLength 最短长度
+     * @param padChar 填充的字符串
+     * @return 返回新的字符串
+     */
+    public static String append(Object... errorMessageArgs) {
+        Joiner joiner = Joiner.on("").skipNulls();
+        return joiner.join(errorMessageArgs);
+    }
+
+    public static String format(String template,Object... errorMessageArgs) {
+       return Strings.lenientFormat(template, errorMessageArgs);
     }
 
 
