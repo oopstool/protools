@@ -117,13 +117,13 @@ public class StringUtils {
      *     <li>{@code StringUtils.padStart("2010", 3, '0') returns "2010"}</li>
      * </ul>
      *
-     * @param string 目标字符串
+     * @param string    目标字符串
      * @param minLength 最短长度
-     * @param padChar 填充的字符串
+     * @param padChar   填充的字符串
      * @return 返回新的字符串
      */
     public static String padStart(String string, int minLength, char padChar) {
-        return Strings.padStart(string,minLength,padChar);
+        return Strings.padStart(string, minLength, padChar);
     }
 
     /**
@@ -134,43 +134,49 @@ public class StringUtils {
      *     <li>{@code StringUtils.padEnd("4.", 5, '0') returns "4.000"}</li>
      *     <li>{@code StringUtils.padEnd("2010", 3, '!') returns "2010"}</li>
      * </ul>
-     *<p>该方法与 {@link #padStart(String, int, char)} 方法用法相同不过是往字符串后边追加。</p>
+     * <p>该方法与 {@link #padStart(String, int, char)} 方法用法相同不过是往字符串后边追加。</p>
      *
-     * @param string 目标字符串
+     * @param string    目标字符串
      * @param minLength 最短长度
-     * @param padChar 填充的字符串
+     * @param padChar   填充的字符串
      * @return 返回新的字符串
      */
     public static String padEnd(String string, int minLength, char padChar) {
-        return Strings.padEnd(string,minLength,padChar);
+        return Strings.padEnd(string, minLength, padChar);
     }
 
     /**
-     * <p>如果string的长度小于minLength，在string后添加padChar，直到字符串长度为minLength。</p><br>
+     * <p>
+     * 拼接字符串。
+     * </p><br>
      *
      * <p>例：</p>
      * <ul>
-     *     <li>{@code StringUtils.padEnd("4.", 5, '0') returns "4.000"}</li>
-     *     <li>{@code StringUtils.padEnd("2010", 3, '!') returns "2010"}</li>
+     *     <li>{@code StringUtils.append(",", "张三", "23") returns "张三,23"}</li>
      * </ul>
-     *<p>该方法与 {@link #padStart(String, int, char)} 方法用法相同不过是往字符串后边追加。</p>
      *
-     * @param string 目标字符串
-     * @param minLength 最短长度
-     * @param padChar 填充的字符串
+     * @param joiner 拼接连接符
+     * @param args   要拼接的字符串
      * @return 返回新的字符串
      */
-    public static String append(Object... errorMessageArgs) {
-        Joiner joiner = Joiner.on("").skipNulls();
-        return joiner.join(errorMessageArgs);
+    public static String append(String joiner, Object... args) {
+        return Joiner.on(joiner).skipNulls().join(args);
     }
-
-    public static String format(String template,Object... errorMessageArgs) {
-       return Strings.lenientFormat(template, errorMessageArgs);
+    /**
+     * <p>
+     * 格式化字符串。
+     * </p><br>
+     *
+     * <p>例：</p>
+     * <ul>
+     *     <li>{@code StringUtils.format("大家好，我是%s,今年%s。", "张三", 23); returns "大家好，我是张三,今年23。"}</li>
+     * </ul>
+     *
+     * @param template 字符串模版
+     * @param args   模版参数
+     * @return 返回新的字符串
+     */
+    public static String format(String template, Object... args) {
+        return Strings.lenientFormat(template, args);
     }
-
-
-
-
-
 }

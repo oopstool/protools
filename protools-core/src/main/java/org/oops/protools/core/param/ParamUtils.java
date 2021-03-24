@@ -1,4 +1,4 @@
-package org.oops.protools.core.string;
+package org.oops.protools.core.param;
 
 import com.google.common.base.Preconditions;
 import javax.annotation.Nullable;

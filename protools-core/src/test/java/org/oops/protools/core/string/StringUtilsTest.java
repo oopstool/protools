@@ -88,4 +88,15 @@ public class StringUtilsTest {
     }
 
 
+    @Test
+    public void append() {
+        String append = StringUtils.append("-", "张三", 23);
+        System.out.println(append);
+    }
+
+    @Test
+    public void format() {
+        String format = StringUtils.format("大家好，我是%s,今年%s。", "张三", 23);
+        System.out.println(format);
+    }
 }

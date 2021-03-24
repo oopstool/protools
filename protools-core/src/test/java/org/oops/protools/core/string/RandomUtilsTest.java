@@ -2,6 +2,7 @@ package org.oops.protools.core.string;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.oops.protools.core.security.RandomUtils;
 
 /**
  * 随机数测试类

@@ -1,6 +1,7 @@
-package org.oops.protools.core.string;
+package org.oops.protools.core.security;
 
 import java.util.concurrent.ThreadLocalRandom;
+import org.oops.protools.core.string.StringUtils;
 
 /**
  * 基于ThreadLocalRandom随机数生成工具
