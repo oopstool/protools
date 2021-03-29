@@ -11,7 +11,6 @@ import com.github.oopstool.string.StringUtils;
  */
 public class RandomUtils {
     private static final String ALL_CHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final String LETTER_CHAR = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String NUMBER_CHAR = "0123456789";
 
 

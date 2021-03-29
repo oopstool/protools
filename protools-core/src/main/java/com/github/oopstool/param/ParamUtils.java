@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
  * 基于guava Preconditions参数校验相关工具
  *
  * @author : HouGY
- * @since : 2021/3/18
+ * @since : 1.0.0
  */
 public class ParamUtils {
 
@@ -119,7 +119,7 @@ public class ParamUtils {
 
     /**
      * <p>
-     * 这个方法是快速判断null并抛出异常支持异常信息模版，通过方法{@link #checkNotNull(Object, String, Object...)}也可以完成此功能<br>
+     * 这个方法是快速判断null并抛出异常支持异常信息模版。
      * <li>{@code
      * Student student = null;
      * ParamUtils.checkNotNull(student,"%s不能为空","学生信息");

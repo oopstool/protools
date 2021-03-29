@@ -2,10 +2,9 @@ package com.github.oopstool.math;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Collections;
 
 /**
- * 数字工具类 来源hutools工具类<br>
+ * 数字工具类 来源hutool工具类<br>
  * 对于精确值计算应该使用 {@link BigDecimal}<br>
  * JDK7中<strong>BigDecimal(double val)</strong>构造方法的结果有一定的不可预知性，例如：
  *
@@ -24,7 +23,8 @@ import java.util.Collections;
  * <li>https://github.com/venusdrogon/feilong-core/wiki/one-jdk7-bug-thinking</li>
  * </ul>
  *
- * @author Looly
+ * @author : HouGY
+ * @since : 1.0.3
  */
 public class NumberUtil {
 
@@ -32,14 +32,6 @@ public class NumberUtil {
 	 * 默认除法运算精度
 	 */
 	private static final int DEFAULT_DIV_SCALE = 10;
-
-	/**
-	 * 0-20对应的阶乘，超过20的阶乘会超过Long.MAX_VALUE
-	 */
-	private static final long[] FACTORIALS = new long[]{
-			1L, 1L, 2L, 6L, 24L, 120L, 720L, 5040L, 40320L, 362880L, 3628800L, 39916800L, 479001600L, 6227020800L,
-			87178291200L, 1307674368000L, 20922789888000L, 355687428096000L, 6402373705728000L, 121645100408832000L,
-			2432902008176640000L};
 
 	/**
 	 * 提供精确的加法运算

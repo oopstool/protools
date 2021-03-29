@@ -2,13 +2,9 @@ package com.github.oopstool.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
+
 import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -16,16 +12,14 @@ import java.util.Map;
  * 基于Gson的json处理工具
  *
  * @author : HouGY
- * @since : 2021/3/17
+ * @since : 1.0.0
  */
 public class JsonUtils {
 
-    private static Gson gson = null;
+    private static final Gson gson;
 
     static {
-        if (gson == null) {
-            gson = new GsonBuilder().serializeNulls().create();
-        }
+        gson = new GsonBuilder().serializeNulls().create();
     }
 
 
@@ -42,11 +36,6 @@ public class JsonUtils {
         return gson.toJson(object);
     }
 
-
-  /*  public static <T> T gsonToBean(byte[] gsonByte, Class<T> cls) {
-        return gsonToBean(new String(gsonByte, "utf-8"), cls);
-        return null;
-    }*/
 
     /**
      * 指定的Json反序列化为指定类的对象
@@ -75,18 +64,21 @@ public class JsonUtils {
      * 此方法适用于非通用对象，如果反序列化通用对象请使用{@link #jsonToList(String, Type)}
      *
      * @param jsonString json字符串
-     * @param cls        转换的类class
      * @param <T>        泛型对象
      * @return 返回指定类对象的集合
      */
-    public static <T> List<T> jsonToList(String jsonString, Class<T> cls) {
+    public static <T> List<T> jsonToList(String jsonString) {
         return gson.fromJson(jsonString, new TypeToken<List<T>>() {
         }.getType());
     }
 
     /**
      * 指定的Json反序列化为指定类对象的list集合<br>
-     * 此方法适用于指定的对象是泛型，如果反序列化非通用对象请使用{@link #jsonToList(String, Class)}
+     * 此方法适用于指定的对象是泛型，如果反序列化非通用对象请使用{@link #jsonToList(String)}
+     * 例如
+     * <code>
+     * List<Map<String, Integer>> mapList = JsonUtils.jsonToList(listMapString, new TypeToken<List<Map<String, Integer>>>(){}.getType());
+     * </code>
      *
      * @param jsonString json字符串
      * @param type       转换的类class
@@ -97,35 +89,33 @@ public class JsonUtils {
         return gson.fromJson(jsonString, type);
     }
 
-   /* public static <T> List<T> jsonToList(String gsonString, Class<T[]> cls) {
-        return Arrays.asList(gson.fromJson(gsonString, cls));
-    }*/
-
-    public static <T> List<Map<String, T>> jsonToListMap(String gsonString) {
-        List<Map<String, T>> list = null;
-            list = gson.fromJson(gsonString, new TypeToken<List<Map<String, T>>>() {
-            }.getType());
+    /**
+     * 该方法是{@link #jsonToList(String, Type)}方法的常用形式，
+     * 如果定制type请使用jsonToList。注意：在没有指定具体的数据类型的时候，会将int类型的数值转换成double。更建议使用jsonToBean。
+     *
+     * @param jsonString json格式字符串
+     * @return 返回转换的list对象
+     */
+    public static <T> List<Map<String, T>> jsonToListMap(String jsonString) {
+        List<Map<String, T>> list;
+        list = gson.fromJson(jsonString, new TypeToken<List<Map<String, T>>>() {
+        }.getType());
         return list;
     }
 
-    public static <T> Map<String, T> gsonToMap(String gsonString) {
-        Map<String, T> map = null;
-        try {
-            map = gson.fromJson(gsonString, new TypeToken<Map<String, T>>() {
-            }.getType());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    /**
+     * 该方法是{@link #jsonToBean(String, Type)}方法的常用形式，
+     * 如果定制type请使用jsonToBean。注意：在没有指定具体的数据类型的时候，会将int类型的数值转换成double。更建议使用jsonToBean。
+     *
+     * @param jsonString json格式字符串
+     * @return 返回map
+     */
+    public static <T> Map<String, T> jsonToMap(String jsonString) {
+        Map<String, T> map;
+        map = gson.fromJson(jsonString, new TypeToken<Map<String, T>>() {
+        }.getType());
         return map;
     }
 
-    public static String isContain(String a) {
-
-        JsonElement a2 = gson.toJsonTree(a);
-
-        String f = a2.getAsJsonObject().get("error").toString();
-
-        return f;
-    }
 
 }

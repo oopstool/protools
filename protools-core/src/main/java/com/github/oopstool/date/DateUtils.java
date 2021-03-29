@@ -1,13 +1,11 @@
 package com.github.oopstool.date;
 
+import com.github.oopstool.string.StringUtils;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -18,24 +16,15 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import com.github.oopstool.string.StringUtils;
 
 /**
  * 基于Java8的时间工具类
  *
  * @author HouGY
- * @since 2021-03-16
+ * @since 1.0.0
  */
 public class DateUtils {
 
-    /**
-     * java.util.Date EEE MMM zzz 缩写数组
-     */
-    private final static String[] wtb = { //
-        "sun", "mon", "tue", "wed", "thu", "fri", "sat", // 星期
-        "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", //
-        "gmt", "ut", "utc", "est", "edt", "cst", "cdt", "mst", "mdt", "pst", "pdt"//
-    };
 
     /**
      * 将Long类型时间戳(毫秒)值转换成String时间格式
@@ -194,7 +183,7 @@ public class DateUtils {
      * @param day 天数,如果为负数，则为减少的天数
      * @return Date
      */
-    public static Date addDay(Date date,long day) {
+    public static Date addDay(Date date, long day) {
         LocalDateTime dateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
         LocalDateTime localDate = dateTime.plusDays(day);
         return localDateTime2Date(localDate);
@@ -321,7 +310,7 @@ public class DateUtils {
      */
     public static String getFirstDayOfMonth(Date date, String pattern) {
         LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault())
-            .withDayOfMonth(1);
+                .withDayOfMonth(1);
 
         if (StringUtils.isBlank(pattern)) {
             pattern = DatePattern.PURE_DATE_PATTERN;
@@ -336,7 +325,7 @@ public class DateUtils {
      * @param pattern 格式，默认格式yyyyMMdd
      * @return 返回字符串日期
      */
-    public static String getLastDayOfMonth(Date date,String pattern) {
+    public static String getLastDayOfMonth(Date date, String pattern) {
         LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
         LocalDateTime lastDay = localDateTime.with(TemporalAdjusters.lastDayOfMonth());
         if (StringUtils.isBlank(pattern)) {
@@ -367,36 +356,35 @@ public class DateUtils {
      * @return 当前时间毫秒值
      */
     public static long currentTimeMillis() {
-        long currentTimeMillis = System.currentTimeMillis();
-        return currentTimeMillis;
+        return System.currentTimeMillis();
     }
 
     /**
      * 将字符串转日期成Long类型的时间戳(毫秒级)，格式为：pattern
      *
-     * @param time
-     * @return
+     * @param time    日期
+     * @param pattern 格式
+     * @return 返回Long类型的时间戳(毫秒级)
      */
     public static Long convertTimeToLong(String time, String pattern) throws ParseException {
         DateFormat format = new SimpleDateFormat(pattern);
         Calendar calBegin = new GregorianCalendar();
         calBegin.setTime(format.parse(time));
-        long beginTime = calBegin.getTimeInMillis();
-        return beginTime;
+        return calBegin.getTimeInMillis();
     }
 
     /**
      * 将字符串转日期成Long类型的时间戳(秒级)，格式为：pattern
      *
-     * @param time
-     * @return
+     * @param time    日期
+     * @param pattern 格式
+     * @return 返回Long类型的时间戳(秒级)
      */
     public static Long convertTimeToSecLong(String time, String pattern) throws ParseException {
         DateFormat format = new SimpleDateFormat(pattern);
         Calendar calBegin = new GregorianCalendar();
         calBegin.setTime(format.parse(time));
-        long beginTime = calBegin.getTimeInMillis() / 1000;
-        return beginTime;
+        return calBegin.getTimeInMillis() / 1000;
     }
 
 
@@ -407,20 +395,20 @@ public class DateUtils {
      * @return 得到xx天xx时xx分xx秒
      */
     public static String formatSecTime(long s) {
-        String DateTimes = null;
         long days = s / (60 * 60 * 24);
         long hours = (s % (60 * 60 * 24)) / (60 * 60);
         long minutes = (s % (60 * 60)) / 60;
         long seconds = s % 60;
+        String DateTimes;
         if (days > 0) {
             DateTimes = days + "天" + hours + "小时" + minutes + "分钟"
-                + seconds + "秒";
+                    + seconds + "秒";
         } else if (hours > 0) {
             DateTimes = hours + "小时" + minutes + "分钟"
-                + seconds + "秒";
+                    + seconds + "秒";
         } else if (minutes > 0) {
             DateTimes = minutes + "分钟"
-                + seconds + "秒";
+                    + seconds + "秒";
         } else {
             DateTimes = seconds + "秒";
         }
@@ -444,15 +432,16 @@ public class DateUtils {
      * @return String
      */
     public static String getYesterday(String pattern) {
-        Date date = addDay(new Date(),-1);
-        return format(date,pattern);
+        Date date = addDay(new Date(), -1);
+        return format(date, pattern);
     }
 
     /**
      * 计算2个日期之间的天数
-     * @param startDate
-     * @param endDate
-     * @return
+     *
+     * @param startDate 开始日期
+     * @param endDate   结束日期
+     * @return 返回相隔天数
      */
     public static long getDatesNumBetween(LocalDate startDate, LocalDate endDate) {
         return ChronoUnit.DAYS.between(startDate, endDate);
@@ -460,14 +449,15 @@ public class DateUtils {
 
     /**
      * 获得2个日期之间的所有的日期
-     * @param startDate
-     * @param endDate
-     * @return
+     *
+     * @param startDate 开始日期
+     * @param endDate   结束日期
+     * @return 返回2个日期之间所有的日期
      */
     public static List<LocalDate> getDatesBetween(LocalDate startDate, LocalDate endDate) {
         long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-        return IntStream.iterate(0, i -> i + 1).limit(numOfDaysBetween).mapToObj(i -> startDate.plusDays(i))
-            .collect(Collectors.toList());
+        return IntStream.iterate(0, i -> i + 1).limit(numOfDaysBetween).mapToObj(startDate::plusDays)
+                .collect(Collectors.toList());
     }
 
 }
