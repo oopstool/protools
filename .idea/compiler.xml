@@ -13,5 +13,11 @@
         <module name="protools-jdbc" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="protools-jdbc" target="8" />
+      <module name="protools-map" target="8" />
+      <module name="protools-ml" target="1.5" />
+      <module name="protools-spring-mybatis" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
