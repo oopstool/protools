@@ -1,4 +1,4 @@
-package com.github.oopstool.string;
+package com.github.oopstool.security;
 
 import com.github.oopstool.security.RandomUtils;
 import org.junit.Assert;

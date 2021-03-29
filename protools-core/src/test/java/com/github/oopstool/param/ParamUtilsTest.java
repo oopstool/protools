@@ -1,7 +1,8 @@
-package com.github.oopstool.string;
+package com.github.oopstool.param;
 
 import com.github.oopstool.json.Student;
 import com.github.oopstool.param.ParamUtils;
+import com.github.oopstool.string.StringUtils;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import java.util.ArrayList;

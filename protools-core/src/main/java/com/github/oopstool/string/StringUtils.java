@@ -3,11 +3,16 @@ package com.github.oopstool.string;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
 /**
  * 基于guava的字符串处理工具
  *
  * @author : HouGY
- * @since : 2021/3/16
+ * @since : 1.0.0
  */
 public class StringUtils {
 
@@ -179,4 +184,132 @@ public class StringUtils {
     public static String format(String template, Object... args) {
         return Strings.lenientFormat(template, args);
     }
+
+    /**
+     * 编码字符串， 默认编码为UTF-8
+     *
+     * @param str 字符串
+     * @return 编码后的字节码
+     */
+    public static byte[] utf8Bytes(CharSequence str) {
+        return bytes(str, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * 编码字符串<br>
+     * 使用系统默认编码
+     *
+     * @param str 字符串
+     * @return 编码后的字节码
+     */
+    public static byte[] bytes(CharSequence str) {
+        return bytes(str, Charset.defaultCharset());
+    }
+
+    /**
+     * 编码字符串
+     *
+     * @param str     字符串
+     * @param charset 字符集，如果此字段为空，则解码的结果取决于平台
+     * @return 编码后的字节码
+     */
+    public static byte[] bytes(CharSequence str, String charset) {
+        return bytes(str, isBlank(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+    }
+
+    /**
+     * 编码字符串
+     *
+     * @param str     字符串
+     * @param charset 字符集，如果此字段为空，则解码的结果取决于平台
+     * @return 编码后的字节码
+     */
+    public static byte[] bytes(CharSequence str, Charset charset) {
+        if (str == null) {
+            return null;
+        }
+
+        if (null == charset) {
+            return str.toString().getBytes();
+        }
+        return str.toString().getBytes(charset);
+    }
+
+
+
+    /**
+     * 将byte数组转为字符串
+     *
+     * @param bytes   byte数组
+     * @param charset 字符集
+     * @return 字符串
+     */
+    public static String str(byte[] bytes, String charset) {
+        return str(bytes, isBlank(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+    }
+
+    /**
+     * 解码字节码
+     *
+     * @param data    字符串
+     * @param charset 字符集，如果此字段为空，则解码的结果取决于平台
+     * @return 解码后的字符串
+     */
+    public static String str(byte[] data, Charset charset) {
+        if (data == null) {
+            return null;
+        }
+
+        if (null == charset) {
+            return new String(data);
+        }
+        return new String(data, charset);
+    }
+
+    /**
+     * 将Byte数组转为字符串
+     *
+     * @param bytes   byte数组
+     * @param charset 字符集
+     * @return 字符串
+     */
+    public static String str(Byte[] bytes, String charset) {
+        return str(bytes, isBlank(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+    }
+
+    /**
+     * 解码字节码
+     *
+     * @param data    字符串
+     * @param charset 字符集，如果此字段为空，则解码的结果取决于平台
+     * @return 解码后的字符串
+     */
+    public static String str(Byte[] data, Charset charset) {
+        if (data == null) {
+            return null;
+        }
+
+        byte[] bytes = new byte[data.length];
+        Byte dataByte;
+        for (int i = 0; i < data.length; i++) {
+            dataByte = data[i];
+            bytes[i] = (null == dataByte) ? -1 : dataByte;
+        }
+
+        return str(bytes, charset);
+    }
+
+
+    /**
+     * 调用对象的toString方法，null会返回“null”
+     *
+     * @param obj 对象
+     * @return 字符串
+     * @since 4.1.3
+     */
+    public static String toString(Object obj) {
+        return null == obj ? NULL : obj.toString();
+    }
+
+
 }

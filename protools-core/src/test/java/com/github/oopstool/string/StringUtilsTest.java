@@ -1,8 +1,11 @@
 package com.github.oopstool.string;
 
 
+import com.github.oopstool.security.HexUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * 字符串测试类
@@ -98,5 +101,40 @@ public class StringUtilsTest {
     public void format() {
         String format = StringUtils.format("大家好，我是%s,今年%s。", "张三", 23);
         System.out.println(format);
+    }
+
+    @Test
+    public void utf8Bytes() {
+        byte[] bytes = StringUtils.utf8Bytes("测试");
+        assert bytes.length>1;
+    }
+
+    @Test
+    public void bytes() {
+        byte[] bytes = StringUtils.bytes("测试");
+        assert bytes.length>1;
+
+        byte[] bytes1 = StringUtils.bytes("测试", StandardCharsets.UTF_8);
+        assert bytes1.length>1;
+
+        byte[] bytes2 = StringUtils.bytes("测试","GBK");
+        assert bytes2.length>1;
+
+        byte[] bytes3 = StringUtils.bytes("测试","UTF-8");
+        assert bytes3.length>1;
+    }
+
+    @Test
+    public void str() {
+        String str = StringUtils.str("E6B58BE8AF95".getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
+        String str1 = StringUtils.str("E6B58BE8AF95".getBytes(StandardCharsets.UTF_8), "UTF-8");
+        assert str1.equals("E6B58BE8AF95") && str.equals(str1);
+
+    }
+
+    @Test
+    public void testToString() {
+        String toString = StringUtils.toString("325");
+        System.out.println(toString);
     }
 }

@@ -7,7 +7,7 @@ import com.github.oopstool.string.StringUtils;
  * 基于ThreadLocalRandom随机数生成工具
  *
  * @author : HouGY
- * @since : 2021/3/18
+ * @since : 1.0.0
  */
 public class RandomUtils {
     private static final String ALL_CHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

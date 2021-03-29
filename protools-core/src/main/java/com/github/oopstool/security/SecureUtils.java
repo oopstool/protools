@@ -19,7 +19,7 @@ import java.util.Enumeration;
  * 3、非对称加密（asymmetric），例如：RSA、DSA等<br>
  *
  * @author : HouGY
- * @since : 2021/3/19
+ * @since : 1.0.3
  */
 public class SecureUtils {
 
