@@ -399,21 +399,21 @@ public class DateUtils {
         long hours = (s % (60 * 60 * 24)) / (60 * 60);
         long minutes = (s % (60 * 60)) / 60;
         long seconds = s % 60;
-        String DateTimes;
+        String dateTimes;
         if (days > 0) {
-            DateTimes = days + "天" + hours + "小时" + minutes + "分钟"
+            dateTimes = days + "天" + hours + "小时" + minutes + "分钟"
                     + seconds + "秒";
         } else if (hours > 0) {
-            DateTimes = hours + "小时" + minutes + "分钟"
+            dateTimes = hours + "小时" + minutes + "分钟"
                     + seconds + "秒";
         } else if (minutes > 0) {
-            DateTimes = minutes + "分钟"
+            dateTimes = minutes + "分钟"
                     + seconds + "秒";
         } else {
-            DateTimes = seconds + "秒";
+            dateTimes = seconds + "秒";
         }
 
-        return DateTimes;
+        return dateTimes;
     }
 
 

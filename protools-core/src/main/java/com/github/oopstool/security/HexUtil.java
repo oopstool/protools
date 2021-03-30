@@ -187,11 +187,14 @@ public class HexUtil {
      */
     private static char[] encodeHex(byte[] data, char[] toDigits) {
         final int len = data.length;
-        final char[] out = new char[len << 1];//len*2
+        //len*2
+        final char[] out = new char[len << 1];
         // two characters from the hex value.
         for (int i = 0, j = 0; i < len; i++) {
-            out[j++] = toDigits[(0xF0 & data[i]) >>> 4];// 高位
-            out[j++] = toDigits[0x0F & data[i]];// 低位
+            // 高位
+            out[j++] = toDigits[(0xF0 & data[i]) >>> 4];
+            // 低位
+            out[j++] = toDigits[0x0F & data[i]];
         }
         return out;
     }
