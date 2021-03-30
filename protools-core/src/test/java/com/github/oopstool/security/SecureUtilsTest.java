@@ -9,6 +9,8 @@ public class SecureUtilsTest {
     public void encryptString() throws NoSuchAlgorithmException {
         String encryptString = SecureUtils.encryptString("111111", SecureUtils.ALGORITHM_SHA);
         assert encryptString.length()==40;
+        String encryptString0 = SecureUtils.encryptStringWithSalt("111111", SecureUtils.ALGORITHM_SHA,"ddd");
+        assert encryptString0.length()==40;
         String encryptString1 = SecureUtils.encryptString("111111", SecureUtils.ALGORITHM_MD5);
         assert encryptString1.length()==32;
         String encryptString2 = SecureUtils.encryptString("111111", SecureUtils.ALGORITHM__SHA256);
@@ -19,17 +21,23 @@ public class SecureUtilsTest {
     public void encryptByMD5() throws NoSuchAlgorithmException {
         String encryptString = SecureUtils.encryptByMD5("111111");
         assert encryptString.length()==32;
+        String encryptString1 = SecureUtils.encryptByMD5("111111","sdf");
+        assert encryptString1.length()==32;
     }
 
     @Test
     public void encryptBySHA() throws NoSuchAlgorithmException {
         String encryptString = SecureUtils.encryptBySHA("111111");
         assert encryptString.length()==40;
+        String encryptString1 = SecureUtils.encryptBySHA("111111","243esdf");
+        assert encryptString1.length()==40;
     }
 
     @Test
     public void encryptBySHA256() throws NoSuchAlgorithmException {
         String encryptString = SecureUtils.encryptBySHA256("111111");
         assert encryptString.length()==64;
+        String encryptString1 = SecureUtils.encryptBySHA256("111111","sdae");
+        assert encryptString1.length()==64;
     }
 }

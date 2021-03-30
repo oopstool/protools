@@ -26,7 +26,7 @@ import java.math.RoundingMode;
  * @author : HouGY
  * @since : 1.0.3
  */
-public class NumberUtil {
+public class NumberUtils {
 
 	/**
 	 * 默认除法运算精度

@@ -1,5 +1,7 @@
 package com.github.oopstool.security;
 
+import com.github.oopstool.string.StringUtils;
+
 import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
@@ -40,21 +42,34 @@ public class SecureUtils {
     public static String encryptString(String source, String algorithm)
         throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
-        messageDigest.update(source.getBytes(StandardCharsets.UTF_8));
-        // TODO 加盐规则
-        messageDigest.update("ahkq1".getBytes(StandardCharsets.UTF_8));
+        messageDigest.update(StringUtils.bytes(source));
         // 加密
         byte[] digest = messageDigest.digest();
         // 16制编码
-        StringBuilder hexValue = new StringBuilder();
-        for (byte b : digest) {
-            int val = ((int) b) & 0xff;
-            if (val < 16) {
-                hexValue.append("0");
-            }
-            hexValue.append(Integer.toHexString(val));
-        }
-        return hexValue.toString();
+        String hexStr = HexUtil.encodeHexStr(digest);
+        return hexStr;
+    }
+
+    /**
+     * <p>
+     * 根据指定的算法将字符串加密，添加盐值
+     * </p>
+     *
+     * @param source    需要加密的字符串
+     * @param algorithm 算法
+     * @param salt 盐值 默认加在头
+     * @return 返回加密的字符串
+     * @throws NoSuchAlgorithmException 如果algorithm不存在抛出NoSuchAlgorithmException异常
+     */
+    public static String encryptStringWithSalt(String source, String algorithm,String salt)
+            throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
+        messageDigest.update(StringUtils.bytes(source));
+        // 加密
+        byte[] digest = messageDigest.digest(StringUtils.bytes(salt));
+        // 16制编码
+        String hexStr = HexUtil.encodeHexStr(digest);
+        return hexStr;
     }
 
     /**
@@ -72,6 +87,21 @@ public class SecureUtils {
 
     /**
      * <p>
+     * 根据MD5将字符串加密，添加盐值
+     * </p>
+     *
+     * @param source 需要加密的字符串
+     * @param salt 盐值
+     * @return 返回加密的字符串
+     * @throws NoSuchAlgorithmException 如果MD5算法不存在抛出NoSuchAlgorithmException异常
+     */
+    public static String encryptByMD5(String source,String salt) throws NoSuchAlgorithmException {
+        return encryptStringWithSalt(source, ALGORITHM_MD5,salt);
+    }
+
+
+    /**
+     * <p>
      * 根据SHA将字符串加密
      * </p>
      *
@@ -81,6 +111,34 @@ public class SecureUtils {
      */
     public static String encryptBySHA(String source) throws NoSuchAlgorithmException {
         return encryptString(source, ALGORITHM_SHA);
+    }
+
+    /**
+     * <p>
+     * 根据SHA将字符串加密
+     * </p>
+     *
+     * @param source 需要加密的字符串
+     * @param salt 盐值
+     * @return 返回加密的字符串
+     * @throws NoSuchAlgorithmException 如果MD5算法不存在抛出NoSuchAlgorithmException异常
+     */
+    public static String encryptBySHA(String source,String salt) throws NoSuchAlgorithmException {
+        return encryptStringWithSalt(source, ALGORITHM_SHA,salt);
+    }
+
+    /**
+     * <p>
+     * 根据SHA256将字符串加密
+     * </p>
+     *
+     * @param source 需要加密的字符串
+     * @param salt 盐值
+     * @return 返回加密的字符串
+     * @throws NoSuchAlgorithmException 如果MD5算法不存在抛出NoSuchAlgorithmException异常
+     */
+    public static String encryptBySHA256(String source,String salt) throws NoSuchAlgorithmException {
+        return encryptStringWithSalt(source, ALGORITHM__SHA256,salt);
     }
 
     /**

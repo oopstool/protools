@@ -312,4 +312,25 @@ public class StringUtils {
     }
 
 
+    /**
+     * 如果字符串是 {@code null}，则返回指定默认字符串，否则返回字符串本身。
+     *<p>
+     *   <ul>
+     *       {@code nullToDefault(null, &quot;default&quot;)  = &quot;default&quot;}
+     *       {@code nullToDefault(&quot;&quot;, &quot;default&quot;)    = &quot;&quot;}
+     *       {@code nullToDefault(&quot;  &quot;, &quot;default&quot;)  = &quot;  &quot;}
+     *       {@code nullToDefault(&quot;bat&quot;, &quot;default&quot;) = &quot;bat&quot;}
+     *   </ul>
+     *</p>
+     *
+     * @param str        要转换的字符串
+     * @param defaultStr 默认字符串
+     * @return 字符串本身或指定的默认字符串
+     */
+    public static String nullToDefault(CharSequence str, String defaultStr) {
+        return (str == null) ? defaultStr : str.toString();
+    }
+
+
+
 }
