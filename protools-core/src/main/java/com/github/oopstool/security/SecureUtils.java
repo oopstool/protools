@@ -206,6 +206,7 @@ public class SecureUtils {
     }
 
     public static void main(String[] args) {
+
         readP12Cert();
     }
 }
