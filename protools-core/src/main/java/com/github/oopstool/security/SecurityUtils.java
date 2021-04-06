@@ -30,7 +30,7 @@ import java.util.HashMap;
  * @author : HouGY
  * @since : 1.0.3
  */
-public class SecureUtils {
+public class SecurityUtils {
 
     public final static String ALGORITHM_SHA = "SHA";
     public final static String ALGORITHM__SHA256 = "SHA-256";
@@ -59,7 +59,7 @@ public class SecureUtils {
         // 加密
         byte[] digest = messageDigest.digest();
         // 16制编码
-        String hexStr = HexUtil.encodeHexStr(digest);
+        String hexStr = HexUtils.encodeHexStr(digest);
         return hexStr;
     }
 
@@ -81,7 +81,7 @@ public class SecureUtils {
         // 加密
         byte[] digest = messageDigest.digest(StringUtils.bytes(salt));
         // 16制编码
-        String hexStr = HexUtil.encodeHexStr(digest);
+        String hexStr = HexUtils.encodeHexStr(digest);
         return hexStr;
     }
 
