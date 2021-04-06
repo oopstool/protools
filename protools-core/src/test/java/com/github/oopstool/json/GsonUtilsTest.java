@@ -9,7 +9,7 @@ import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class JsonUtilsTest {
+public class GsonUtilsTest {
 
     private static Student student;
 
@@ -24,29 +24,29 @@ public class JsonUtilsTest {
     @Test
     public void toJson() {
         ArrayList<Student> arrayList = Lists.newArrayList(student, student1);
-        String json = JsonUtils.toJson(student);
+        String json = GsonUtils.toJson(student);
         assert !StringUtils.isBlank(json);
         assert arrayList.size() == 2;
         System.out.println(json);
-        System.out.println(JsonUtils.toJson(arrayList));
+        System.out.println(GsonUtils.toJson(arrayList));
     }
 
     @Test
     public void jsonToBean() {
         String json = "{\"id\":1,\"name\":\"张三\",\"age\":23,\"sex\":\"男\"}";
-        Student student = JsonUtils.jsonToBean(json, Student.class);
+        Student student = GsonUtils.jsonToBean(json, Student.class);
         assert student.getAge() == 23 && student.getId() == 1;
 
-        Map map = JsonUtils.jsonToBean(json, new TypeToken<Map<String, String>>() {
+        Map map = GsonUtils.jsonToBean(json, new TypeToken<Map<String, String>>() {
         }.getType());
         System.out.println(map);
 
         String json1 = "{\"id\":第一,\"name\":\"张三\",\"age\":33岁,\"sex\":\"男\"}";
-        Map stringObjectMap = JsonUtils.jsonToMap(json1);
+        Map stringObjectMap = GsonUtils.jsonToMap(json1);
         System.out.println(stringObjectMap);
 
         String json2 = "{\"id\":1,\"name\":\"2\",\"age\":23,\"sex\":\"0\"}";
-        Map map2 = JsonUtils.jsonToBean(json2, new TypeToken<Map<String, Integer>>() {
+        Map map2 = GsonUtils.jsonToBean(json2, new TypeToken<Map<String, Integer>>() {
         }.getType());
         System.out.println(map2);
 
@@ -56,20 +56,20 @@ public class JsonUtilsTest {
     public void jsonToList() {
         //jsonToList 单个对象
         String studentArray = "[{\"id\":1,\"name\":\"张三\",\"age\":23,\"sex\":null},{\"id\":12,\"name\":\"李四\",\"age\":24,\"sex\":\"女\"}]";
-        List<Student> studentList = JsonUtils.jsonToList(studentArray);
+        List<Student> studentList = GsonUtils.jsonToList(studentArray);
         assert studentList.size() == 2;
         //jsonToList 复杂对象
         String listMapString = "[{\"李四\":24,\"张三\":23},{\"麻子\":26,\"王二\":25}]";
-        List<Map<String, Integer>> mapList = JsonUtils.jsonToList(listMapString, new TypeToken<List<Map<String, Integer>>>() {
+        List<Map<String, Integer>> mapList = GsonUtils.jsonToList(listMapString, new TypeToken<List<Map<String, Integer>>>() {
         }.getType());
         assert mapList.size() == 2;
-        System.out.println(JsonUtils.toJson(mapList));
-        List<Map<String, Integer>> maps = JsonUtils.jsonToList(listMapString);
-        System.out.println(JsonUtils.toJson(maps));
+        System.out.println(GsonUtils.toJson(mapList));
+        List<Map<String, Integer>> maps = GsonUtils.jsonToList(listMapString);
+        System.out.println(GsonUtils.toJson(maps));
 
-        List<Map<String, Student>> maps1 = JsonUtils.jsonToListMap(listMapString);
+        List<Map<String, Student>> maps1 = GsonUtils.jsonToListMap(listMapString);
 
-        List<Student> studentList2 = JsonUtils.jsonToList(listMapString, new TypeToken<List<Student>>() {
+        List<Student> studentList2 = GsonUtils.jsonToList(listMapString, new TypeToken<List<Student>>() {
         }.getType());
         System.out.println(studentList2.size());
 
@@ -85,6 +85,6 @@ public class JsonUtilsTest {
         map2.put("王二", 25);
         map2.put("麻子", 26);
         ArrayList<HashMap<String, Integer>> hashMaps = Lists.newArrayList(map1, map2);
-        System.out.println(JsonUtils.toJson(hashMaps));
+        System.out.println(GsonUtils.toJson(hashMaps));
     }
 }

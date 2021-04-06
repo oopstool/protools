@@ -14,7 +14,7 @@ import java.util.Map;
  * @author : HouGY
  * @since : 1.0.0
  */
-public class JsonUtils {
+public class GsonUtils {
 
     private static final Gson gson;
 
@@ -23,7 +23,7 @@ public class JsonUtils {
     }
 
 
-    private JsonUtils() {
+    private GsonUtils() {
     }
 
     /**
