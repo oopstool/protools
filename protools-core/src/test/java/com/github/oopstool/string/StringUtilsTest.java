@@ -22,10 +22,13 @@ public class StringUtilsTest {
         String b = "";
         String c = null;
         String d = "  ";
+        String e = "\r\n";
+
         Assert.assertFalse(StringUtils.isBlank(a));
         Assert.assertTrue(StringUtils.isBlank(b));
         Assert.assertTrue(StringUtils.isBlank(c));
         Assert.assertTrue(StringUtils.isBlank(d));
+        Assert.assertTrue(StringUtils.isBlank(e));
     }
 
 
@@ -35,7 +38,7 @@ public class StringUtilsTest {
         String b = "";
         String c = null;
         Assert.assertFalse(StringUtils.isEmpty(a));
-        Assert.assertFalse(StringUtils.isEmpty(b));
+        Assert.assertTrue(StringUtils.isEmpty(b));
         Assert.assertTrue(StringUtils.isEmpty(c));
     }
 
