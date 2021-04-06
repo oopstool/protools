@@ -1,6 +1,6 @@
 package com.github.oopstool.system;
 
-import com.github.oopstool.file.DataSizeUtil;
+import com.github.oopstool.file.DataSizeUtils;
 
 import java.io.Serializable;
 
@@ -75,10 +75,10 @@ public class RuntimeInfo implements Serializable {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 
-		SystemUtils.append(builder, "Max Memory:    ", DataSizeUtil.format(getMaxMemory()));
-		SystemUtils.append(builder, "Total Memory:     ", DataSizeUtil.format(getTotalMemory()));
-		SystemUtils.append(builder, "Free Memory:     ", DataSizeUtil.format(getFreeMemory()));
-		SystemUtils.append(builder, "Usable Memory:     ", DataSizeUtil.format(getUsableMemory()));
+		SystemUtils.append(builder, "Max Memory:    ", DataSizeUtils.format(getMaxMemory()));
+		SystemUtils.append(builder, "Total Memory:     ", DataSizeUtils.format(getTotalMemory()));
+		SystemUtils.append(builder, "Free Memory:     ", DataSizeUtils.format(getFreeMemory()));
+		SystemUtils.append(builder, "Usable Memory:     ", DataSizeUtils.format(getUsableMemory()));
 
 		return builder.toString();
 	}
