@@ -14,22 +14,6 @@ import java.nio.charset.StandardCharsets;
  */
 public class StringUtils {
 
-    /**
-     * 字符串常量：{@code "null"} <br>
-     * 注意：{@code "null" != null}
-     */
-    public static final String NULL = "null";
-
-    /**
-     * 字符串常量：空字符串 {@code ""}
-     */
-    public static final String EMPTY = "";
-
-    /**
-     * 字符串常量：空格符 {@code " "}
-     */
-    public static final String SPACE = " ";
-
 
     /**
      * 判断字符串是否为空，空的定义如下：
@@ -71,6 +55,33 @@ public class StringUtils {
     }
 
     /**
+     * 判断字符串是否不为空，空的定义如下：
+     * <p>
+     * <li>1：null</li>
+     * <li>2：空字符串：""</li>
+     * <li>3：空格字符串：" "</li>
+     * <li>4：换行符等特殊字符："\n"</li>
+     *
+     * <p>
+     * 例：
+     * </p>
+     * <ul>
+     *     {@code StringUtils.isNotBlank(null)     // false}
+     *     {@code StringUtils.isNotBlank("")       // false}
+     *     {@code StringUtils.isNotBlank(" ")       // false}
+     *     {@code StringUtils.isNotBlank("\n")       // false}
+     *     {@code StringUtils.isNotBlank("a")    // true}
+     * </ul>
+     * </p>
+     *
+     * @param string 目标字符串
+     * @return 返回boolean类型判断结果
+     */
+    public static boolean isNotBlank(String string) {
+       return !isBlank(string);
+    }
+
+    /**
      * <p>判断字符串是否为空，空的定义如下：</p><br>
      * <ol>
      *     <li>null</li>
@@ -91,6 +102,27 @@ public class StringUtils {
      */
     public static boolean isEmpty(String string) {
         return string == null || string.length() == 0;
+    }
+
+    /**
+     * <p>判断字符串是否不为空，空的定义如下：</p><br>
+     * <ol>
+     *     <li>null</li>
+     *     <li>空字符串：""</li>
+     * </ol>
+     *
+     * <p>例：</p>
+     * <ul>
+     *     <li>{@code StringUtils.isNotEmpty(null)     // false}</li>
+     *     <li>{@code StringUtils.isNotEmpty("")       // false}</li>
+     *     <li>{@code StringUtils.isNotEmpty("a")    // true}</li>
+     * </ul>
+     *
+     * @param string 目标字符串
+     * @return 返回boolean类型判断结果
+     */
+    public static boolean isNotEmpty(String string) {
+        return !isEmpty(string);
     }
 
     /**
@@ -319,7 +351,7 @@ public class StringUtils {
      * @return 字符串
      */
     public static String toString(Object obj) {
-        return null == obj ? NULL : obj.toString();
+        return null == obj ? StringConstants.NULL : obj.toString();
     }
 
 

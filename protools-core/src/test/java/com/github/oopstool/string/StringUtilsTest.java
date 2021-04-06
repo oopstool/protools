@@ -31,6 +31,21 @@ public class StringUtilsTest {
         Assert.assertTrue(StringUtils.isBlank(e));
     }
 
+    @Test
+    public void isNotBlank() {
+        String a = "a";
+        String b = "";
+        String c = null;
+        String d = "  ";
+        String e = "\r\n";
+
+        Assert.assertTrue(StringUtils.isNotBlank(a));
+        Assert.assertFalse(StringUtils.isNotBlank(b));
+        Assert.assertFalse(StringUtils.isNotBlank(c));
+        Assert.assertFalse(StringUtils.isNotBlank(d));
+        Assert.assertFalse(StringUtils.isNotBlank(e));
+    }
+
 
     @Test
     public void isEmpty() {
@@ -40,6 +55,16 @@ public class StringUtilsTest {
         Assert.assertFalse(StringUtils.isEmpty(a));
         Assert.assertTrue(StringUtils.isEmpty(b));
         Assert.assertTrue(StringUtils.isEmpty(c));
+    }
+
+    @Test
+    public void isNotEmpty() {
+        String a = "a";
+        String b = "";
+        String c = null;
+        Assert.assertTrue(StringUtils.isNotEmpty(a));
+        Assert.assertFalse(StringUtils.isNotEmpty(b));
+        Assert.assertFalse(StringUtils.isNotEmpty(c));
     }
 
     @Test
@@ -140,4 +165,6 @@ public class StringUtilsTest {
         String toString = StringUtils.toString("325");
         System.out.println(toString);
     }
+
+
 }
