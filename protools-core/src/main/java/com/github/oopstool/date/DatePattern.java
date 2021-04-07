@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 /**
  * 日期格式常量
  *
- * @author :hougaungyu
- * @since : 2021/03/16
+ * @author HouGY
+ * @since 1.0.0
  */
 public interface DatePattern {
 
