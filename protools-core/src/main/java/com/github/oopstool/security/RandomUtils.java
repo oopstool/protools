@@ -1,6 +1,8 @@
 package com.github.oopstool.security;
 
 import java.util.concurrent.ThreadLocalRandom;
+
+import com.github.oopstool.string.StringConstants;
 import com.github.oopstool.string.StringUtils;
 
 /**
@@ -27,7 +29,7 @@ public class RandomUtils {
      */
     public static String randomString(String baseString, int length) {
         if (StringUtils.isBlank(baseString)) {
-            return StringUtils.EMPTY;
+            return StringConstants.EMPTY;
         }
         final StringBuilder sb = new StringBuilder(length);
         if (length < 1) {

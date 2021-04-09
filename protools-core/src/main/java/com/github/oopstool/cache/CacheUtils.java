@@ -1,22 +1,27 @@
-package com.github.oopstool.string;
+package com.github.oopstool.cache;
 
+import com.google.common.base.Function;
+import com.google.common.base.Supplier;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import com.google.common.collect.Lists;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
 /**
  * 基于guava缓存工具类
  *
  * @author : HouGY
- * @since : 2021/3/22
+ * @since : 1.0.3
  */
 public class CacheUtils {
 
@@ -33,12 +38,12 @@ public class CacheUtils {
      * 设置的时候，可以让 expireAfterWrite > refreshAfterWrite, 这样每间隔refreshAfterWrite时间，当有访问的时候，进行refresh,
      * 如果超过 expireAfterWrite 没有访问，则让缓存失效， 这样可以同时利用guava cache的刷新机制和过期机制
      *
-     * @param <K>
-     * @param <V>
+     * @param <K> key
+     * @param <V> value
      * @param expireAfterWrite
-     *            设置写缓存后过期时间，一个请求进行加载操作，其它请求阻塞
+     *            设置写缓存后过期时间 单位秒，一个请求进行加载操作，其它请求阻塞
      * @param refreshAfterWrite
-     *            设置写缓存后刷新时间，一个请求进行刷新操作，其它请求返回旧值
+     *            设置写缓存后刷新时间 单位秒，一个请求进行刷新操作，其它请求返回旧值
      * @param concurrencyLevel
      *            允许同时并发更新操作数。是指对一个缓存中的数据进行更新操作时的并发量。
      *            设置这个参数后，允许并发的最大量不一定会严格遵守这个参数。因为数据被分别存储到不同的区块中，而这些数据并不是均匀分布的。
@@ -54,12 +59,10 @@ public class CacheUtils {
      *            允许最大的缓存条目数
      * @param cacheLoader
      *            缓存加载逻辑
-     * @param removalListener
-     * @return
+     * @return 返回LoadingCache 对象
      */
     public static <K, V> LoadingCache<K, V> buildCache(Integer expireAfterWrite, Integer refreshAfterWrite,
-        Integer concurrencyLevel, Integer initialCapacity, Integer maximumSize, CacheLoader<K, V> cacheLoader,
-        RemovalListener removalListener) {
+        Integer concurrencyLevel, Integer initialCapacity, Integer maximumSize, CacheLoader<K, V> cacheLoader) {
         LoadingCache<K, V> cache =
             CacheBuilder
                 .newBuilder()
@@ -69,46 +72,46 @@ public class CacheUtils {
                 .initialCapacity(initialCapacity)
                 .maximumSize(maximumSize)
                 .recordStats()
-                .removalListener(removalListener).build(cacheLoader);
+                .build(cacheLoader);
         return cache;
     }
 
-    public static void main1(String[] args) throws Exception {
-        CacheLoader<String, List<String>> cacheLoader = new CacheLoader<String, List<String>>() {
-            @Override
-            public List<String> load(String key) {
-                return loadCache(key);
-            }
-        };
-        RemovalListener removalListener = new RemovalListener() {
-            @Override
-            public void onRemoval(RemovalNotification removalNotification) {
-                System.out.println(removalNotification.getKey() + " was removed，the reason is:"
-                    + removalNotification.getCause());
-            }
-        };
-        LoadingCache<String,List<String>> loadingCache = buildCache(2,1, 1, 32,100, cacheLoader,removalListener);
-
-        System.out.println(loadingCache.get("1"));
-        Thread.sleep(6000);
-        System.out.println("===="+loadingCache.get("1"));
+    public static <K, V> LoadingCache<K, V> buildCacheWithoutExpire(Integer refreshAfterWrite, Integer concurrencyLevel, Integer initialCapacity, Integer maximumSize, CacheLoader<K, V> cacheLoader) {
+        LoadingCache<K, V> cache =
+                CacheBuilder
+                        .newBuilder()
+                        .concurrencyLevel(concurrencyLevel)
+                        .refreshAfterWrite(refreshAfterWrite, TimeUnit.SECONDS)
+                        .initialCapacity(initialCapacity)
+                        .maximumSize(maximumSize)
+                        .recordStats()
+                        .build(cacheLoader);
+        return cache;
     }
 
-    public static List<String> loadCache(String key){
-        System.out.println("loadCache begin");
-        List<String> list = Lists.newArrayList("AAA", "BBB");
-        System.out.println("loadCache end");
-        return list;
+    /**
+     * 从指定的函数构建 CacheLoader
+     *
+     * @param function 函数
+     * @param <K> key
+     * @param <V> value
+     * @return 返回CacheLoader
+     */
+    public static <K, V> CacheLoader<K, V> from(Function<K, V> function) {
+        return CacheLoader.from(function);
     }
 
-    //main函数测试用
-    public static void main(String[] args) {
-        //获取所有的数据库驱动
-        Enumeration<Driver> driverEnum = DriverManager.getDrivers();
-        //打印出所有驱动信息
-        while(driverEnum.hasMoreElements()){
-            System.out.println(driverEnum.nextElement());
-        }
+    /**
+     * 从指定的函数构建 CacheLoader
+     *
+     * @param supplier 函数
+     * @param <K> key
+     * @param <V> value
+     * @return 返回CacheLoader
+     */
+    public static <V> CacheLoader<Object, V> from(Supplier<V> supplier) {
+        return CacheLoader.from(supplier);
     }
+
 
 }

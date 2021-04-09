@@ -1,4 +1,4 @@
-package com.github.oopstool.file;
+package com.github.oopstool.system;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +10,7 @@ import java.util.Properties;
  * 配置文件解析
  *
  * @author : HouGY
- * @since : 1.0.4
+ * @since : 1.0.3
  */
 public class PropertiesUtils {
 

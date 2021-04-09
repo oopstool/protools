@@ -3,10 +3,8 @@ package com.github.oopstool.string;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 
-import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 /**
  * 基于guava的字符串处理工具
@@ -16,69 +14,115 @@ import java.util.Arrays;
  */
 public class StringUtils {
 
-    /**
-     * 字符串常量：{@code "null"} <br>
-     * 注意：{@code "null" != null}
-     */
-    public static final String NULL = "null";
-
-    /**
-     * 字符串常量：空字符串 {@code ""}
-     */
-    public static final String EMPTY = "";
-
-    /**
-     * 字符串常量：空格符 {@code " "}
-     */
-    public static final String SPACE = " ";
-
 
     /**
      * 判断字符串是否为空，空的定义如下：
      * <p>
      * <li>1：null</li>
      * <li>2：空字符串：""</li>
+     * <li>3：空格字符串：" "</li>
+     * <li>4：换行符等特殊字符："\n"</li>
+     *
      * <p>
      * 例：
      * </p>
      * <ul>
      *     {@code StringUtils.isBlank(null)     // true}
      *     {@code StringUtils.isBlank("")       // true}
+     *     {@code StringUtils.isBlank(" ")       // true}
+     *     {@code StringUtils.isBlank("\n")       // true}
      *     {@code StringUtils.isBlank("a")    // false}
      * </ul>
      * </p>
      * <p>
      *     注意：该方法与 {@link #isEmpty(String)} 的区别是：
-     *      该方法会校验空白字符
+     *      该方法会校验空白字符和特殊字符
      * </p>
      *
      * @param string 目标字符串
      * @return 返回boolean类型判断结果
      */
     public static boolean isBlank(String string) {
-        return Strings.isNullOrEmpty(string);
+        if (!Strings.isNullOrEmpty(string)) {
+            char[] chars = string.toCharArray();
+            for (char aChar : chars) {
+                if (!Character.isWhitespace(aChar)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 判断字符串是否不为空，空的定义如下：
+     * <p>
+     * <li>1：null</li>
+     * <li>2：空字符串：""</li>
+     * <li>3：空格字符串：" "</li>
+     * <li>4：换行符等特殊字符："\n"</li>
+     *
+     * <p>
+     * 例：
+     * </p>
+     * <ul>
+     *     {@code StringUtils.isNotBlank(null)     // false}
+     *     {@code StringUtils.isNotBlank("")       // false}
+     *     {@code StringUtils.isNotBlank(" ")       // false}
+     *     {@code StringUtils.isNotBlank("\n")       // false}
+     *     {@code StringUtils.isNotBlank("a")    // true}
+     * </ul>
+     * </p>
+     *
+     * @param string 目标字符串
+     * @return 返回boolean类型判断结果
+     */
+    public static boolean isNotBlank(String string) {
+       return !isBlank(string);
     }
 
     /**
      * <p>判断字符串是否为空，空的定义如下：</p><br>
      * <ol>
-     *     <li>{@code null}</li>
+     *     <li>null</li>
+     *     <li>空字符串：""</li>
      * </ol>
      *
      * <p>例：</p>
      * <ul>
      *     <li>{@code StringUtils.isEmpty(null)     // true}</li>
-     *     <li>{@code StringUtils.isEmpty("")       // false}</li>
+     *     <li>{@code StringUtils.isEmpty("")       // true}</li>
      *     <li>{@code StringUtils.isEmpty("a")    // false}</li>
      * </ul>
      *
-     * <p>注意：该方法与 {@link #isBlank(String)} 的区别是：该方法不校验空白字符。</p>
+     * <p>注意：该方法与 {@link #isBlank(String)} 的区别是：该方法不校验长度大于0空白字符。</p>
      *
      * @param string 目标字符串
      * @return 返回boolean类型判断结果
      */
     public static boolean isEmpty(String string) {
-        return string == null;
+        return string == null || string.length() == 0;
+    }
+
+    /**
+     * <p>判断字符串是否不为空，空的定义如下：</p><br>
+     * <ol>
+     *     <li>null</li>
+     *     <li>空字符串：""</li>
+     * </ol>
+     *
+     * <p>例：</p>
+     * <ul>
+     *     <li>{@code StringUtils.isNotEmpty(null)     // false}</li>
+     *     <li>{@code StringUtils.isNotEmpty("")       // false}</li>
+     *     <li>{@code StringUtils.isNotEmpty("a")    // true}</li>
+     * </ul>
+     *
+     * @param string 目标字符串
+     * @return 返回boolean类型判断结果
+     */
+    public static boolean isNotEmpty(String string) {
+        return !isEmpty(string);
     }
 
     /**
@@ -167,6 +211,7 @@ public class StringUtils {
     public static String append(String joiner, Object... args) {
         return Joiner.on(joiner).skipNulls().join(args);
     }
+
     /**
      * <p>
      * 格式化字符串。
@@ -178,7 +223,7 @@ public class StringUtils {
      * </ul>
      *
      * @param template 字符串模版
-     * @param args   模版参数
+     * @param args     模版参数
      * @return 返回新的字符串
      */
     public static String format(String template, Object... args) {
@@ -234,7 +279,6 @@ public class StringUtils {
         }
         return str.toString().getBytes(charset);
     }
-
 
 
     /**
@@ -305,23 +349,22 @@ public class StringUtils {
      *
      * @param obj 对象
      * @return 字符串
-     * @since 4.1.3
      */
     public static String toString(Object obj) {
-        return null == obj ? NULL : obj.toString();
+        return null == obj ? StringConstants.NULL : obj.toString();
     }
 
 
     /**
      * 如果字符串是 {@code null}，则返回指定默认字符串，否则返回字符串本身。
-     *<p>
+     * <p>
      *   <ul>
      *       {@code nullToDefault(null, &quot;default&quot;)  = &quot;default&quot;}
      *       {@code nullToDefault(&quot;&quot;, &quot;default&quot;)    = &quot;&quot;}
      *       {@code nullToDefault(&quot;  &quot;, &quot;default&quot;)  = &quot;  &quot;}
      *       {@code nullToDefault(&quot;bat&quot;, &quot;default&quot;) = &quot;bat&quot;}
      *   </ul>
-     *</p>
+     * </p>
      *
      * @param str        要转换的字符串
      * @param defaultStr 默认字符串
@@ -330,7 +373,6 @@ public class StringUtils {
     public static String nullToDefault(CharSequence str, String defaultStr) {
         return (str == null) ? defaultStr : str.toString();
     }
-
 
 
 }

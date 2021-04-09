@@ -1,7 +1,6 @@
 package com.github.oopstool.string;
 
 
-import com.github.oopstool.security.HexUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,10 +21,28 @@ public class StringUtilsTest {
         String b = "";
         String c = null;
         String d = "  ";
+        String e = "\r\n";
+
         Assert.assertFalse(StringUtils.isBlank(a));
         Assert.assertTrue(StringUtils.isBlank(b));
         Assert.assertTrue(StringUtils.isBlank(c));
         Assert.assertTrue(StringUtils.isBlank(d));
+        Assert.assertTrue(StringUtils.isBlank(e));
+    }
+
+    @Test
+    public void isNotBlank() {
+        String a = "a";
+        String b = "";
+        String c = null;
+        String d = "  ";
+        String e = "\r\n";
+
+        Assert.assertTrue(StringUtils.isNotBlank(a));
+        Assert.assertFalse(StringUtils.isNotBlank(b));
+        Assert.assertFalse(StringUtils.isNotBlank(c));
+        Assert.assertFalse(StringUtils.isNotBlank(d));
+        Assert.assertFalse(StringUtils.isNotBlank(e));
     }
 
 
@@ -35,8 +52,18 @@ public class StringUtilsTest {
         String b = "";
         String c = null;
         Assert.assertFalse(StringUtils.isEmpty(a));
-        Assert.assertFalse(StringUtils.isEmpty(b));
+        Assert.assertTrue(StringUtils.isEmpty(b));
         Assert.assertTrue(StringUtils.isEmpty(c));
+    }
+
+    @Test
+    public void isNotEmpty() {
+        String a = "a";
+        String b = "";
+        String c = null;
+        Assert.assertTrue(StringUtils.isNotEmpty(a));
+        Assert.assertFalse(StringUtils.isNotEmpty(b));
+        Assert.assertFalse(StringUtils.isNotEmpty(c));
     }
 
     @Test
@@ -137,4 +164,6 @@ public class StringUtilsTest {
         String toString = StringUtils.toString("325");
         System.out.println(toString);
     }
+
+
 }
