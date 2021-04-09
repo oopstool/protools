@@ -4,7 +4,7 @@ package com.github.oopstool.string;
  * 字符串常量
  *
  * @author : HouGY
- * @since : 1.0.4
+ * @since : 1.0.3
  */
 public interface StringConstants {
 

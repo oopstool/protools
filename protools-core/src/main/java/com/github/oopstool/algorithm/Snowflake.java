@@ -26,7 +26,7 @@ import java.util.Date;
  * 参考：http://www.cnblogs.com/relucent/p/4955340.html
  *
  * @author HouGY
- * @since 1.0.4
+ * @since 1.0.3
  */
 public class Snowflake implements Serializable {
     private static final long serialVersionUID = 1L;

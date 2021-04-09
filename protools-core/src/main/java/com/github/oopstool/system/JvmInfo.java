@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 代表Java Virtual Machine Implementation的信息。
  *
  * @author houGY
- * @since 1.0.4
+ * @since 1.0.3
  */
 public class JvmInfo implements Serializable{
 	private static final long serialVersionUID = 1L;

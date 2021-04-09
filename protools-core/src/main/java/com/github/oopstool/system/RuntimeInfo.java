@@ -8,7 +8,7 @@ import java.io.Serializable;
  * 运行时信息，包括内存总大小、已用大小、可用大小等
  *
  * @author houGY
- * @since 1.0.4
+ * @since 1.0.3
  */
 public class RuntimeInfo implements Serializable {
 	private static final long serialVersionUID = 1L;

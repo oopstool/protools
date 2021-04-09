@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * 代表Java Implementation的信息。
  *
  * @author houGY
- * @since 1.0.4
+ * @since 1.0.3
  */
 public class JavaInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
