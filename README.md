@@ -27,7 +27,7 @@ protools一期阶段仅仅提供core包服务，远景规划包括有关地图�
 <dependency>
     <groupId>com.github.oopstool</groupId>
     <artifactId>protools-core</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 ## PR
