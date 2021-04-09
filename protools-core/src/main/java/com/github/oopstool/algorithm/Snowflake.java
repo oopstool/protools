@@ -2,7 +2,6 @@ package com.github.oopstool.algorithm;
 
 
 import com.github.oopstool.string.StringUtils;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,6 +28,7 @@ import java.util.Date;
  * @since 1.0.3
  */
 public class Snowflake implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private final long twepoch;
@@ -48,21 +48,21 @@ public class Snowflake implements Serializable {
      * 序列号12位
      */
     private final long sequenceBits = 12L;
-	/**
-	 * 机器节点左移12位
-	 */
+    /**
+     * 机器节点左移12位
+     */
     private final long workerIdShift = sequenceBits;
-	/**
-	 * 数据中心节点左移17位
-	 */
+    /**
+     * 数据中心节点左移17位
+     */
     private final long dataCenterIdShift = sequenceBits + workerIdBits;
-	/**
-	 * 时间毫秒数左移22位
- 	 */
+    /**
+     * 时间毫秒数左移22位
+     */
     private final long timestampLeftShift = sequenceBits + workerIdBits + dataCenterIdBits;
-	/**
-	 * 序列掩码，用于限定序列最大值不能超过4095
-	 */
+    /**
+     * 序列掩码，用于限定序列最大值不能超过4095
+     */
     @SuppressWarnings("FieldCanBeLocal")
     private final long sequenceMask = ~(-1L << sequenceBits);
 
@@ -95,10 +95,12 @@ public class Snowflake implements Serializable {
             this.twepoch = 1288834974657L;
         }
         if (workerId > maxWorkerId || workerId < 0) {
-            throw new IllegalArgumentException(StringUtils.format("worker Id can't be greater than %s or less than 0", maxWorkerId));
+            throw new IllegalArgumentException(
+                StringUtils.format("worker Id can't be greater than %s or less than 0", maxWorkerId));
         }
         if (dataCenterId > maxDataCenterId || dataCenterId < 0) {
-            throw new IllegalArgumentException(StringUtils.format("datacenter Id can't be greater than %s or less than 0", maxDataCenterId));
+            throw new IllegalArgumentException(
+                StringUtils.format("datacenter Id can't be greater than %s or less than 0", maxDataCenterId));
         }
         this.workerId = workerId;
         this.dataCenterId = dataCenterId;
@@ -147,7 +149,8 @@ public class Snowflake implements Serializable {
                 timestamp = lastTimestamp;
             } else {
                 // 如果服务器时间有问题(时钟后退) 报错。
-                throw new IllegalStateException(StringUtils.format("Clock moved backwards. Refusing to generate id for %s ms", lastTimestamp - timestamp));
+                throw new IllegalStateException(StringUtils
+                    .format("Clock moved backwards. Refusing to generate id for %s ms", lastTimestamp - timestamp));
             }
         }
 
@@ -163,7 +166,8 @@ public class Snowflake implements Serializable {
 
         lastTimestamp = timestamp;
 
-        return ((timestamp - twepoch) << timestampLeftShift) | (dataCenterId << dataCenterIdShift) | (workerId << workerIdShift) | sequence;
+        return ((timestamp - twepoch) << timestampLeftShift) | (dataCenterId << dataCenterIdShift) | (workerId
+            << workerIdShift) | sequence;
     }
 
     /**
@@ -192,7 +196,8 @@ public class Snowflake implements Serializable {
         if (timestamp < lastTimestamp) {
             // 如果发现新的时间戳比上次记录的时间戳数值小，说明操作系统时间发生了倒退，报错
             throw new IllegalStateException(
-                    StringUtils.format("Clock moved backwards. Refusing to generate id for %s ms", lastTimestamp - timestamp));
+                StringUtils
+                    .format("Clock moved backwards. Refusing to generate id for %s ms", lastTimestamp - timestamp));
         }
         return timestamp;
     }

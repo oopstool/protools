@@ -17,7 +17,6 @@ public class Student {
     private String sex;
 
 
-
     public Student(Integer id, String name, Integer age, String sex) {
         this.id = id;
         this.name = name;

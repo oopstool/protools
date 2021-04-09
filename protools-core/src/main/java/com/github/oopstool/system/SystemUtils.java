@@ -2,9 +2,17 @@ package com.github.oopstool.system;
 
 
 import com.github.oopstool.string.StringUtils;
-
 import java.io.PrintWriter;
-import java.lang.management.*;
+import java.lang.management.ClassLoadingMXBean;
+import java.lang.management.CompilationMXBean;
+import java.lang.management.GarbageCollectorMXBean;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryManagerMXBean;
+import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.OperatingSystemMXBean;
+import java.lang.management.RuntimeMXBean;
+import java.lang.management.ThreadMXBean;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,6 +25,7 @@ import java.util.Properties;
  * @since 1.0.3
  */
 public class SystemUtils {
+
     /**
      * 取得系统属性，如果因为Java安全的限制而失败，则将错误打在Log中，然后返回 defaultValue
      *
@@ -46,7 +55,7 @@ public class SystemUtils {
         } catch (SecurityException e) {
             if (false == quiet) {
                 System.err.println(StringUtils.format("Caught a SecurityException reading the system property %s; " +
-                        "the SystemUtil property value will default to null.", name));
+                    "the SystemUtil property value will default to null.", name));
             }
         }
 
@@ -55,9 +64,9 @@ public class SystemUtils {
                 value = System.getenv(name);
             } catch (SecurityException e) {
                 if
-				(false == quiet) {
+                (false == quiet) {
                     System.err.println(StringUtils.format("Caught a SecurityException reading the system env %s; " +
-                            "the SystemUtil env value will default to null.", name));
+                        "the SystemUtil env value will default to null.", name));
                 }
             }
         }
@@ -289,7 +298,7 @@ public class SystemUtils {
      * @return <code>HostInfo</code>对象
      */
     public static HostInfo getHostInfo() {
-       return HostInfo.getInstance();
+        return HostInfo.getInstance();
     }
 
     /**

@@ -1,16 +1,20 @@
 package com.github.oopstool.security;
 
 import com.github.oopstool.string.StringUtils;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.security.*;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.spec.InvalidKeySpecException;
@@ -18,6 +22,12 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Enumeration;
 import java.util.HashMap;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 
 /**
@@ -53,7 +63,7 @@ public class SecurityUtils {
      * @throws NoSuchAlgorithmException 如果algorithm不存在抛出NoSuchAlgorithmException异常
      */
     public static String encryptString(String source, String algorithm)
-            throws NoSuchAlgorithmException {
+        throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
         messageDigest.update(StringUtils.bytes(source));
         // 加密
@@ -75,7 +85,7 @@ public class SecurityUtils {
      * @throws NoSuchAlgorithmException 如果algorithm不存在抛出NoSuchAlgorithmException异常
      */
     public static String encryptStringWithSalt(String source, String algorithm, String salt)
-            throws NoSuchAlgorithmException {
+        throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
         messageDigest.update(StringUtils.bytes(source));
         // 加密
@@ -201,7 +211,8 @@ public class SecurityUtils {
      * @return 返回公钥对象
      * @throws NoSuchAlgorithmException, IOException, InvalidKeySpecException
      */
-    public static PublicKey getPublicKey(String pubKeyBase64) throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
+    public static PublicKey getPublicKey(String pubKeyBase64)
+        throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
         // 把 公钥的Base64文本 转换为已编码的 公钥bytes
         byte[] encPubKey = new BASE64Decoder().decodeBuffer(pubKeyBase64);
 
@@ -219,7 +230,8 @@ public class SecurityUtils {
      * @return 返回公钥对象
      * @throws NoSuchAlgorithmException, IOException, InvalidKeySpecException
      */
-    public static PrivateKey getPrivateKey(String priKeyBase64) throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
+    public static PrivateKey getPrivateKey(String priKeyBase64)
+        throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
         // 把 私钥的Base64文本 转换为已编码的 私钥bytes
         byte[] encPriKey = new BASE64Decoder().decodeBuffer(priKeyBase64);
 
@@ -238,7 +250,8 @@ public class SecurityUtils {
      * @return 返回加密后的数据
      * @throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException 异常
      */
-    public static byte[] encrypt(byte[] plainData, PublicKey pubKey) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException {
+    public static byte[] encrypt(byte[] plainData, PublicKey pubKey)
+        throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException {
         // 获取指定算法的密码器
         Cipher cipher = Cipher.getInstance(ALGORITHM_RSA);
 
@@ -257,7 +270,8 @@ public class SecurityUtils {
      * @return 返回解密后的数据
      * @throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException 异常
      */
-    public static byte[] decrypt(byte[] cipherData, PrivateKey priKey) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+    public static byte[] decrypt(byte[] cipherData, PrivateKey priKey)
+        throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         // 获取指定算法的密码器
         Cipher cipher = Cipher.getInstance(ALGORITHM_RSA);
 
@@ -273,10 +287,11 @@ public class SecurityUtils {
      *
      * @param filePath 文件路径
      * @param password 密码
-     * @throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, IOException, CertificateException
      * @return 返回公钥和私钥map
+     * @throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, IOException, CertificateException
      */
-    public static HashMap<String, Key> readP12Cert(String filePath, String password) throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, IOException, CertificateException {
+    public static HashMap<String, Key> readP12Cert(String filePath, String password)
+        throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, IOException, CertificateException {
         KeyStore ks = KeyStore.getInstance(ALGORITHM_PKCS12);
         FileInputStream fis = new FileInputStream(filePath);
 
@@ -297,10 +312,10 @@ public class SecurityUtils {
         PrivateKey prikey = (PrivateKey) ks.getKey(keyAlias, nPassword);
         Certificate cert = ks.getCertificate(keyAlias);
         PublicKey pubkey = cert.getPublicKey();
-        HashMap<String,Key> hashMap = new HashMap<>(2);
+        HashMap<String, Key> hashMap = new HashMap<>(2);
         //todo
-        hashMap.put("prikey",prikey);
-        hashMap.put("pubkey",pubkey);
+        hashMap.put("prikey", prikey);
+        hashMap.put("pubkey", pubkey);
         return hashMap;
     }
 }

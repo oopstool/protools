@@ -1,6 +1,5 @@
 package com.github.oopstool.file;
 
-import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.annotation.format.NumberFormat;
@@ -11,7 +10,6 @@ import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 /**
  * 学生测试类
  *
- * @author : HouGY
  * @since : 2021/3/17
  */
 

@@ -1,6 +1,5 @@
 package com.github.oopstool.security;
 
-import com.github.oopstool.security.RandomUtils;
 import org.junit.Assert;
 import org.junit.Test;
 

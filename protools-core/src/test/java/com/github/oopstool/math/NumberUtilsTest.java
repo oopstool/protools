@@ -10,13 +10,12 @@ public class NumberUtilsTest {
     public void add() {
         BigDecimal add = NumberUtils.add(1, 2.01d, 3L);
         System.out.println(add.toString());
-        double add1 = NumberUtils.add(1d,2d);
+        double add1 = NumberUtils.add(1d, 2d);
         System.out.println(add1);
 
         BigDecimal add2 = NumberUtils.add("1", "2.34");
         System.out.println(add2);
     }
-
 
 
     @Test
@@ -30,14 +29,14 @@ public class NumberUtilsTest {
 
     @Test
     public void mul() {
-        BigDecimal mul = NumberUtils.mul(1.1, 3.3333,4L);
+        BigDecimal mul = NumberUtils.mul(1.1, 3.3333, 4L);
         System.out.println(mul.toString());
     }
 
 
     @Test
     public void div() {
-        double div = NumberUtils.div(14, 3,2, RoundingMode.HALF_UP);
+        double div = NumberUtils.div(14, 3, 2, RoundingMode.HALF_UP);
         System.out.println(div);
     }
 

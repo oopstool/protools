@@ -4,7 +4,6 @@ import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.read.listener.ReadListener;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -19,7 +18,9 @@ import java.util.Set;
  * @since : 1.0.0
  */
 public class ExcelUtils {
+
     private static class DefaultExcelListener<T> extends AnalysisEventListener<T> {
+
         private final List<T> data = new ArrayList<>();
 
         @Override

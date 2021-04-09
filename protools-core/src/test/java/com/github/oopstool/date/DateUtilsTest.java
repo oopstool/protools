@@ -18,7 +18,8 @@ public class DateUtilsTest {
 
     @Test
     public void convertTimeToString() {
-        String timeToString = DateUtils.convertTimeToString(System.currentTimeMillis(), DatePattern.NORM_DATETIME_PATTERN);
+        String timeToString = DateUtils
+            .convertTimeToString(System.currentTimeMillis(), DatePattern.NORM_DATETIME_PATTERN);
         Assert.assertNotNull(timeToString);
         System.out.println(timeToString);
     }
@@ -35,19 +36,19 @@ public class DateUtilsTest {
     @Test
     public void getYear() {
         int year = DateUtils.getYear();
-        assert year==2021;
+        assert year == 2021;
     }
 
     @Test
     public void getMonth() {
         int month = DateUtils.getMonth();
-        assert month==3;
+        assert month == 3;
     }
 
     @Test
     public void getDayOfMonth() {
         int dayOfMonth = DateUtils.getDayOfMonth();
-        assert dayOfMonth==24;
+        assert dayOfMonth == 24;
     }
 
     @Test
@@ -70,61 +71,62 @@ public class DateUtilsTest {
     @Test
     public void addMinutes() {
         Date date = DateUtils.addMinutes(new Date(), 2L);
-        System.out.println(DateUtils.format(date,DatePattern.PURE_DATETIME_PATTERN));
+        System.out.println(DateUtils.format(date, DatePattern.PURE_DATETIME_PATTERN));
     }
 
     @Test
     public void addHour() {
         Date date = DateUtils.addHour(new Date(), 1L);
-        System.out.println(DateUtils.format(date,DatePattern.NORM_DATETIME_PATTERN));
+        System.out.println(DateUtils.format(date, DatePattern.NORM_DATETIME_PATTERN));
     }
 
     @Test
     public void addMonth() {
         Date date = DateUtils.addMonth(1);
-        System.out.println(DateUtils.format(date,DatePattern.NORM_DATETIME_PATTERN));
+        System.out.println(DateUtils.format(date, DatePattern.NORM_DATETIME_PATTERN));
     }
 
     @Test
     public void addDay() {
-        Date date = DateUtils.addDay(new Date(),1);
-        System.out.println(DateUtils.format(date,DatePattern.NORM_DATETIME_PATTERN));
+        Date date = DateUtils.addDay(new Date(), 1);
+        System.out.println(DateUtils.format(date, DatePattern.NORM_DATETIME_PATTERN));
     }
 
     @Test
     public void addWeek() {
         Date date = DateUtils.addWeek(1);
-        System.out.println(DateUtils.format(date,DatePattern.NORM_DATETIME_PATTERN));
+        System.out.println(DateUtils.format(date, DatePattern.NORM_DATETIME_PATTERN));
     }
 
     @Test
     public void testAddMonth() {
-        Date date = DateUtils.addMonth(DateUtils.parseDateByPattern("2021-03-22 15:50:41",DatePattern.NORM_DATETIME_PATTERN),1);
-        System.out.println(DateUtils.format(date,DatePattern.NORM_DATETIME_PATTERN));
+        Date date = DateUtils
+            .addMonth(DateUtils.parseDateByPattern("2021-03-22 15:50:41", DatePattern.NORM_DATETIME_PATTERN), 1);
+        System.out.println(DateUtils.format(date, DatePattern.NORM_DATETIME_PATTERN));
     }
 
     @Test
     public void getStartTime() {
         Date startTime = DateUtils.getStartTime();
-        System.out.println(DateUtils.format(startTime,DatePattern.NORM_DATETIME_PATTERN));
+        System.out.println(DateUtils.format(startTime, DatePattern.NORM_DATETIME_PATTERN));
     }
 
     @Test
     public void getEndTime() {
         Date startTime = DateUtils.getEndTime();
-        System.out.println(DateUtils.format(startTime,DatePattern.NORM_DATETIME_PATTERN));
+        System.out.println(DateUtils.format(startTime, DatePattern.NORM_DATETIME_PATTERN));
     }
 
     @Test
     public void localDate2Date() {
         Date date = DateUtils.localDate2Date(LocalDate.now());
-        System.out.println(DateUtils.format(date,DatePattern.NORM_DATETIME_PATTERN));
+        System.out.println(DateUtils.format(date, DatePattern.NORM_DATETIME_PATTERN));
     }
 
     @Test
     public void localDateTime2Date() {
         Date date = DateUtils.localDateTime2Date(LocalDateTime.now());
-        System.out.println(DateUtils.format(date,DatePattern.NORM_DATETIME_PATTERN));
+        System.out.println(DateUtils.format(date, DatePattern.NORM_DATETIME_PATTERN));
     }
 
     @Test
@@ -188,11 +190,9 @@ public class DateUtilsTest {
     }
 
 
-
-
     @Test
     public void getLastDayOfMonth() {
-        String lastDayOfMonth = DateUtils.getLastDayOfMonth(new Date(),DatePattern.NORM_DATE_PATTERN);
+        String lastDayOfMonth = DateUtils.getLastDayOfMonth(new Date(), DatePattern.NORM_DATE_PATTERN);
         System.out.println(lastDayOfMonth);
     }
 

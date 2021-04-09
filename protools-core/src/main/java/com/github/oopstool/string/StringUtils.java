@@ -2,7 +2,6 @@ package com.github.oopstool.string;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
-
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
@@ -78,7 +77,7 @@ public class StringUtils {
      * @return 返回boolean类型判断结果
      */
     public static boolean isNotBlank(String string) {
-       return !isBlank(string);
+        return !isBlank(string);
     }
 
     /**

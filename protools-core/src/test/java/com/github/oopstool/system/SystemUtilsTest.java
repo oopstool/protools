@@ -1,12 +1,19 @@
 package com.github.oopstool.system;
 
 import com.github.oopstool.json.Student;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.lang.management.*;
+import java.lang.management.ClassLoadingMXBean;
+import java.lang.management.CompilationMXBean;
+import java.lang.management.GarbageCollectorMXBean;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryManagerMXBean;
+import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.OperatingSystemMXBean;
+import java.lang.management.RuntimeMXBean;
+import java.lang.management.ThreadMXBean;
 import java.util.List;
 import java.util.Properties;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class SystemUtilsTest {
 
@@ -43,7 +50,8 @@ public class SystemUtilsTest {
 
     @Test
     public void getClassLoadingMXBean() {
-        ClassLoadingMXBean classLoadingMXBean = SystemUtils.getClassLoadingMXBean();classLoadingMXBean.getLoadedClassCount();
+        ClassLoadingMXBean classLoadingMXBean = SystemUtils.getClassLoadingMXBean();
+        classLoadingMXBean.getLoadedClassCount();
         System.out.println(classLoadingMXBean);
     }
 
@@ -186,7 +194,7 @@ public class SystemUtilsTest {
     @Test
     public void append() {
         StringBuilder stringBuilder = new StringBuilder();
-        SystemUtils.append(stringBuilder,"DSR",new Student(1,"22",23,"324"));
+        SystemUtils.append(stringBuilder, "DSR", new Student(1, "22", 23, "324"));
         System.out.println(stringBuilder.toString());
     }
 }

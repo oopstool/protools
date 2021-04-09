@@ -1,9 +1,8 @@
 package com.github.oopstool.security;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 import com.github.oopstool.string.StringConstants;
 import com.github.oopstool.string.StringUtils;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 基于ThreadLocalRandom随机数生成工具
@@ -12,16 +11,16 @@ import com.github.oopstool.string.StringUtils;
  * @since : 1.0.0
  */
 public class RandomUtils {
+
     private static final String ALL_CHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String NUMBER_CHAR = "0123456789";
 
 
     /**
      * <p>
-     *     根据指定的字符串样本获得一个指定长度的随机字符串
-     *     如果{@code baseString}为空null或者""则返回""
+     * 根据指定的字符串样本获得一个指定长度的随机字符串
+     * 如果{@code baseString}为空null或者""则返回""
      * </p>
-     *
      *
      * @param baseString 随机字符选取的样本
      * @param length     字符串的长度
@@ -45,13 +44,14 @@ public class RandomUtils {
 
     /**
      * <p>
-     *     获得一个随机的字符串（只包含数字和字母）
-     *     字符串样本为"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+     * 获得一个随机的字符串（只包含数字和字母）
+     * 字符串样本为"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
      * </p>
      *
      * <p>
-     *     注意 如果自定义字符串样本请使用{@link #randomString(String, int)}}
-    * </p>
+     * 注意 如果自定义字符串样本请使用{@link #randomString(String, int)}}
+     * </p>
+     *
      * @param length 字符串的长度
      * @return 随机字符串
      */
@@ -61,8 +61,8 @@ public class RandomUtils {
 
     /**
      * <p>
-     *     获得一个只包含数字的字符串
-     *     数字样本"0123456789" 如果需要自定义数字样本请使用{@link #randomString(String, int)}
+     * 获得一个只包含数字的字符串
+     * 数字样本"0123456789" 如果需要自定义数字样本请使用{@link #randomString(String, int)}
      * </p>
      *
      * @param length 字符串的长度
@@ -75,7 +75,7 @@ public class RandomUtils {
 
     /**
      * <p>
-     *     获得随机数int值
+     * 获得随机数int值
      * </p>
      *
      * @return 随机数
@@ -83,9 +83,10 @@ public class RandomUtils {
     public static int randomInt() {
         return ThreadLocalRandom.current().nextInt();
     }
+
     /**
      * <p>
-     *     获得指定范围内的随机数 [0,limit)
+     * 获得指定范围内的随机数 [0,limit)
      * </p>
      *
      * @param limit 限制随机数的范围，不包括这个数
@@ -97,7 +98,7 @@ public class RandomUtils {
 
     /**
      * <p>
-     *     获得指定范围内的随机数
+     * 获得指定范围内的随机数
      * </p>
      *
      * @param min 最小数（包含）
@@ -110,7 +111,7 @@ public class RandomUtils {
 
     /**
      * <p>
-     *     获得随机数long值
+     * 获得随机数long值
      * </p>
      *
      * @return 随机数
@@ -118,9 +119,10 @@ public class RandomUtils {
     public static long randomLong() {
         return ThreadLocalRandom.current().nextLong();
     }
+
     /**
      * <p>
-     *     获得指定范围内的随机数 [0,limit)
+     * 获得指定范围内的随机数 [0,limit)
      * </p>
      *
      * @param limit 限制随机数的范围，不包括这个数
@@ -132,7 +134,7 @@ public class RandomUtils {
 
     /**
      * <p>
-     *     获得指定范围内的随机数
+     * 获得指定范围内的随机数
      * </p>
      *
      * @param min 最小数（包含）
@@ -145,7 +147,7 @@ public class RandomUtils {
 
     /**
      * <p>
-     *     获得随机数double值
+     * 获得随机数double值
      * </p>
      *
      * @return 随机数
@@ -153,9 +155,10 @@ public class RandomUtils {
     public static double randomDouble() {
         return ThreadLocalRandom.current().nextDouble();
     }
+
     /**
      * <p>
-     *     获得指定范围内的随机数 [0,limit)
+     * 获得指定范围内的随机数 [0,limit)
      * </p>
      *
      * @param limit 限制随机数的范围，不包括这个数
@@ -167,7 +170,7 @@ public class RandomUtils {
 
     /**
      * <p>
-     *     获得指定范围内的随机数
+     * 获得指定范围内的随机数
      * </p>
      *
      * @param min 最小数（包含）

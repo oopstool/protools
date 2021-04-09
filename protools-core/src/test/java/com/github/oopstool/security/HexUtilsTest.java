@@ -1,10 +1,9 @@
 package com.github.oopstool.security;
 
 import com.github.oopstool.string.StringUtils;
-import org.junit.Test;
-
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import org.junit.Test;
 
 public class HexUtilsTest {
 
@@ -13,7 +12,7 @@ public class HexUtilsTest {
     public void encodeHex() {
         char[] encodeHex = HexUtils.encodeHex(StringUtils.bytes("cde"));
         System.out.println(encodeHex);
-        char[] encodeHex1 = HexUtils.encodeHex(StringUtils.bytes("测试"),true);
+        char[] encodeHex1 = HexUtils.encodeHex(StringUtils.bytes("测试"), true);
         System.out.println(encodeHex1);
         char[] encodeHex2 = HexUtils.encodeHex("cde", StandardCharsets.UTF_8);
         System.out.println(encodeHex2);
@@ -24,26 +23,20 @@ public class HexUtilsTest {
         String cde = HexUtils.encodeHexStr(StringUtils.bytes("测试"));
         System.out.println(cde);
 
-        String cde1 = HexUtils.encodeHexStr(StringUtils.bytes("测试"),false);
+        String cde1 = HexUtils.encodeHexStr(StringUtils.bytes("测试"), false);
         System.out.println(cde1);
-
 
         String cde2 = HexUtils.encodeHexStr("测试");
         System.out.println(cde2);
 
-        String cde3 = HexUtils.encodeHexStr("测试",StandardCharsets.UTF_8);
+        String cde3 = HexUtils.encodeHexStr("测试", StandardCharsets.UTF_8);
         System.out.println(cde3);
 
-        String cde4 = HexUtils.encodeHexStr("测试",StandardCharsets.UTF_16);
+        String cde4 = HexUtils.encodeHexStr("测试", StandardCharsets.UTF_16);
         System.out.println(cde4);
 
-        String cde5 = HexUtils.encodeHexStr("测试",Charset.forName("GBK"));
+        String cde5 = HexUtils.encodeHexStr("测试", Charset.forName("GBK"));
         System.out.println(cde5);
-
-
-
-
-
 
         String decodeHexStr = HexUtils.decodeHexStr(cde);
         System.out.println(decodeHexStr);
@@ -57,10 +50,10 @@ public class HexUtilsTest {
         String decodeHexStr3 = HexUtils.decodeHexStr(cde3);
         System.out.println(decodeHexStr3);
 
-        String decodeHexStr4 = HexUtils.decodeHexStr(cde4,StandardCharsets.UTF_16);
+        String decodeHexStr4 = HexUtils.decodeHexStr(cde4, StandardCharsets.UTF_16);
         System.out.println(decodeHexStr4);
 
-        String decodeHexStr5 = HexUtils.decodeHexStr(cde5,Charset.forName("GBK"));
+        String decodeHexStr5 = HexUtils.decodeHexStr(cde5, Charset.forName("GBK"));
         System.out.println(decodeHexStr5);
     }
 
@@ -74,7 +67,7 @@ public class HexUtilsTest {
         System.out.println(e6B58BE8AF95_1);
         assert e6B58BE8AF95_1.equals("测试");
 
-        String e6b58be8af95 = HexUtils.decodeHexStr("e6b58be8af95".toCharArray(),StandardCharsets.UTF_8);
+        String e6b58be8af95 = HexUtils.decodeHexStr("e6b58be8af95".toCharArray(), StandardCharsets.UTF_8);
         System.out.println(e6b58be8af95);
     }
 

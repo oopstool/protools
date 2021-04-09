@@ -2,21 +2,16 @@ package com.github.oopstool.algorithm;
 
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-
 import java.nio.charset.Charset;
 import java.util.HashSet;
-import java.util.Set;
-
-import static org.junit.Assert.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class SnowflakeTest {
 
     public static void main(String[] args) {
         //1%，有个概率问题，布隆越大，占用的空间越多，但是错误概率减小了
-        BloomFilter bloomFilter= BloomFilter.create(Funnels.stringFunnel(Charset.defaultCharset()),1000000,0.001);
+        BloomFilter bloomFilter = BloomFilter.create(Funnels.stringFunnel(Charset.defaultCharset()), 1000000, 0.001);
         bloomFilter.put("111");
         //为true表示在布隆过滤器里
         System.out.println(bloomFilter.mightContain("111"));
@@ -24,7 +19,7 @@ public class SnowflakeTest {
 
 
     @Test
-    public void snowflakeTest1(){
+    public void snowflakeTest1() {
         //构建Snowflake，提供终端ID和数据中心ID
         Snowflake idWorker = new Snowflake(0, 0);
         long nextId = idWorker.nextId();
@@ -32,7 +27,7 @@ public class SnowflakeTest {
     }
 
     @Test
-    public void snowflakeTest(){
+    public void snowflakeTest() {
         HashSet<Long> hashSet = new HashSet<>();
 
         //构建Snowflake，提供终端ID和数据中心ID
@@ -45,7 +40,7 @@ public class SnowflakeTest {
     }
 
     @Test
-    public void snowflakeGetTest(){
+    public void snowflakeGetTest() {
         //构建Snowflake，提供终端ID和数据中心ID
         Snowflake idWorker = new Snowflake(1, 2);
         long nextId = idWorker.nextId();

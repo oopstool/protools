@@ -3,13 +3,11 @@ package com.github.oopstool.file;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class DataSizeUtilsTest {
 
     @Test
-    public void parseTest(){
-      long parse = DataSizeUtils.parse("3M");
+    public void parseTest() {
+        long parse = DataSizeUtils.parse("3M");
         Assert.assertEquals(3145728, parse);
 
         parse = DataSizeUtils.parse("3m");
@@ -52,7 +50,7 @@ public class DataSizeUtilsTest {
     }
 
     @Test
-    public void formatTest(){
+    public void formatTest() {
         String format = DataSizeUtils.format(Long.MAX_VALUE);
         Assert.assertEquals("8 EB", format);
 

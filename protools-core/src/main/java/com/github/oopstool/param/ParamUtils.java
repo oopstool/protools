@@ -96,9 +96,10 @@ public class ParamUtils {
     public static <T> T checkNotNull(T reference) {
         return Preconditions.checkNotNull(reference);
     }
+
     /**
      * <p>
-     * 这个方法是快速判断null并抛出异常和自定义的异常信息，通过方法{@link #checkArgument(boolean,Object)}也可以完成此功能<br>
+     * 这个方法是快速判断null并抛出异常和自定义的异常信息，通过方法{@link #checkArgument(boolean, Object)}也可以完成此功能<br>
      * <li>{@code
      * Student student = null;
      * ParamUtils.checkNotNull(student);
@@ -107,9 +108,9 @@ public class ParamUtils {
      *
      * </p>
      *
-     * @param reference 泛型对象
+     * @param reference    泛型对象
      * @param errorMessage 错误信息
-     * @param <T>       指定的泛型
+     * @param <T>          指定的泛型
      * @return 如果为空则抛出NullPointerException
      * @throws NullPointerException if {@code reference} is null
      */
@@ -128,16 +129,16 @@ public class ParamUtils {
      *
      * </p>
      *
-     * @param reference 泛型对象
+     * @param reference            泛型对象
      * @param errorMessageTemplate 错误信息模版
-     * @param errorMessageArgs 模版参数
-     * @param <T>       指定的泛型
+     * @param errorMessageArgs     模版参数
+     * @param <T>                  指定的泛型
      * @return 如果为空则抛出NullPointerException
      * @throws NullPointerException if {@code reference} is null
      */
     public static <T> T checkNotNull(T reference,
         @Nullable String errorMessageTemplate,
         @Nullable Object... errorMessageArgs) {
-        return Preconditions.checkNotNull(reference,errorMessageTemplate,errorMessageArgs);
+        return Preconditions.checkNotNull(reference, errorMessageTemplate, errorMessageArgs);
     }
 }

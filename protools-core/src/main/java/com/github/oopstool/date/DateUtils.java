@@ -1,11 +1,14 @@
 package com.github.oopstool.date;
 
 import com.github.oopstool.string.StringUtils;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -310,7 +313,7 @@ public class DateUtils {
      */
     public static String getFirstDayOfMonth(Date date, String pattern) {
         LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault())
-                .withDayOfMonth(1);
+            .withDayOfMonth(1);
 
         if (StringUtils.isBlank(pattern)) {
             pattern = DatePattern.PURE_DATE_PATTERN;
@@ -402,13 +405,13 @@ public class DateUtils {
         String dateTimes;
         if (days > 0) {
             dateTimes = days + "天" + hours + "小时" + minutes + "分钟"
-                    + seconds + "秒";
+                + seconds + "秒";
         } else if (hours > 0) {
             dateTimes = hours + "小时" + minutes + "分钟"
-                    + seconds + "秒";
+                + seconds + "秒";
         } else if (minutes > 0) {
             dateTimes = minutes + "分钟"
-                    + seconds + "秒";
+                + seconds + "秒";
         } else {
             dateTimes = seconds + "秒";
         }
@@ -457,7 +460,7 @@ public class DateUtils {
     public static List<LocalDate> getDatesBetween(LocalDate startDate, LocalDate endDate) {
         long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
         return IntStream.iterate(0, i -> i + 1).limit(numOfDaysBetween).mapToObj(startDate::plusDays)
-                .collect(Collectors.toList());
+            .collect(Collectors.toList());
     }
 
 }

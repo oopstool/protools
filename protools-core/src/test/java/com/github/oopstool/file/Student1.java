@@ -33,7 +33,6 @@ public class Student1 {
     private String doubleData;
 
 
-
     public Integer getId() {
         return id;
     }

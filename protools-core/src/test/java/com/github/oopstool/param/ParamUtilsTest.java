@@ -1,7 +1,6 @@
 package com.github.oopstool.param;
 
 import com.github.oopstool.json.Student;
-import com.github.oopstool.param.ParamUtils;
 import com.github.oopstool.string.StringUtils;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
@@ -47,7 +46,7 @@ public class ParamUtilsTest {
 
     @Test
     public void testCheckArgument() {
-        Preconditions.checkArgument(false,"111",1,"dd");
+        Preconditions.checkArgument(false, "111", 1, "dd");
     }
 
     @Test
@@ -61,14 +60,14 @@ public class ParamUtilsTest {
         }
         //校验为null返回NullPointerException及自定义错误信息
         try {
-            ParamUtils.checkNotNull(student,"学生信息不能为空");
+            ParamUtils.checkNotNull(student, "学生信息不能为空");
         } catch (Exception e) {
             assert e instanceof NullPointerException;
             assert "学生信息不能为空".equals(e.getMessage());
         }
         //校验为null返回NullPointerException及模版错误信息
         try {
-            ParamUtils.checkNotNull(student,"%s不能为空","学生信息");
+            ParamUtils.checkNotNull(student, "%s不能为空", "学生信息");
         } catch (Exception e) {
             assert e instanceof NullPointerException;
             assert "学生信息不能为空".equals(e.getMessage());

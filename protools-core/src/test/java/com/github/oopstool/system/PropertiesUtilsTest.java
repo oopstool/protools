@@ -1,9 +1,7 @@
 package com.github.oopstool.system;
 
-import com.github.oopstool.system.PropertiesUtils;
-import org.junit.Test;
-
 import java.util.Properties;
+import org.junit.Test;
 
 public class PropertiesUtilsTest {
 

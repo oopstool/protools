@@ -3,9 +3,10 @@ package com.github.oopstool.json;
 import com.github.oopstool.string.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
-
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,8 +61,9 @@ public class GsonUtilsTest {
         assert studentList.size() == 2;
         //jsonToList 复杂对象
         String listMapString = "[{\"李四\":24,\"张三\":23},{\"麻子\":26,\"王二\":25}]";
-        List<Map<String, Integer>> mapList = GsonUtils.jsonToList(listMapString, new TypeToken<List<Map<String, Integer>>>() {
-        }.getType());
+        List<Map<String, Integer>> mapList = GsonUtils
+            .jsonToList(listMapString, new TypeToken<List<Map<String, Integer>>>() {
+            }.getType());
         assert mapList.size() == 2;
         System.out.println(GsonUtils.toJson(mapList));
         List<Map<String, Integer>> maps = GsonUtils.jsonToList(listMapString);

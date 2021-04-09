@@ -22,5 +22,5 @@ public interface StringConstants {
     /**
      * 字符串常量：空格符 {@code " "}
      */
-     String SPACE = " ";
+    String SPACE = " ";
 }

@@ -13,27 +13,27 @@ import com.alibaba.excel.annotation.format.NumberFormat;
  */
 public class Student2 {
 
-    @ExcelProperty(value = "姓名",index = 0)
+    @ExcelProperty(value = "姓名", index = 0)
     private String name;
 
-    @ExcelProperty(value = "序号",index = 1)
+    @ExcelProperty(value = "序号", index = 1)
     private Integer id;
-    @ExcelProperty(value = "年龄",index = 3)
+    @ExcelProperty(value = "年龄", index = 3)
     @ExcelIgnore
     private Integer age;
-    @ExcelProperty(value = "性别",index = 2)
+    @ExcelProperty(value = "性别", index = 2)
     private String sex;
     /**
      * 这里用string 去接日期才能格式化。我想接收年月日格式
      */
     @DateTimeFormat("yyyy年MM月dd日HH时mm分ss秒")
-    @ExcelProperty(value = "出生日期",index = 4)
+    @ExcelProperty(value = "出生日期", index = 4)
     private String date;
     /**
      * 我想接收百分比的数字
      */
     @NumberFormat("#.##%")
-    @ExcelProperty(value = "绩效",index = 5)
+    @ExcelProperty(value = "绩效", index = 5)
     private String doubleData;
 
     @ExcelIgnore

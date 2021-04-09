@@ -23,7 +23,8 @@ public class PropertiesUtils {
     public static Properties loadProperties(String propertyFileName) {
         InputStreamReader in;
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        in = new InputStreamReader(Objects.requireNonNull(loader.getResourceAsStream(propertyFileName)), StandardCharsets.UTF_8);
+        in = new InputStreamReader(Objects.requireNonNull(loader.getResourceAsStream(propertyFileName)),
+            StandardCharsets.UTF_8);
         Properties prop = new Properties();
         try {
             prop.load(in);
