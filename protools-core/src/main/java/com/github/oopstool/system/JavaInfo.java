@@ -110,7 +110,6 @@ public class JavaInfo implements Serializable {
             return 0;
         }
 
-        //String javaVersion = ReUtil.get("^[0-9]{1,2}(\\.[0-9]{1,2}){0,2}", JAVA_VERSION, 0);
         String str = JAVA_VERSION;
         String regex = "^[0-9]{1,2}(\\.[0-9]{1,2}){0,2}";
         Matcher matcher = Pattern.compile(regex).matcher(str);
@@ -118,8 +117,6 @@ public class JavaInfo implements Serializable {
         if (b) {
             String javaVersion = matcher.group(0);
             String[] split = javaVersion.split("\\.");
-            //String result = ArrayUtil.join(split, "");
-
             //保证java10及其之后的版本返回的值为4位
             if (split[0].length() > 1) {
                 //result = (result + "0000").substring(0, 4);

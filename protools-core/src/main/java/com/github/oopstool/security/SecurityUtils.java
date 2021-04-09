@@ -42,11 +42,7 @@ import sun.misc.BASE64Encoder;
  */
 public class SecurityUtils {
 
-    public final static String ALGORITHM_SHA = "SHA";
-    public final static String ALGORITHM__SHA256 = "SHA-256";
-    public final static String ALGORITHM_MD5 = "MD5";
-    private static final String ALGORITHM_RSA = "RSA";
-    private static final String ALGORITHM_PKCS12 = "PKCS12";
+
     /**
      * 密钥长度
      */
@@ -105,7 +101,7 @@ public class SecurityUtils {
      * @throws NoSuchAlgorithmException 如果MD5算法不存在抛出NoSuchAlgorithmException异常
      */
     public static String encryptByMD5(String source) throws NoSuchAlgorithmException {
-        return encryptString(source, ALGORITHM_MD5);
+        return encryptString(source, SecurityConstants.ALGORITHM_MD5);
     }
 
     /**
@@ -119,7 +115,7 @@ public class SecurityUtils {
      * @throws NoSuchAlgorithmException 如果MD5算法不存在抛出NoSuchAlgorithmException异常
      */
     public static String encryptByMD5(String source, String salt) throws NoSuchAlgorithmException {
-        return encryptStringWithSalt(source, ALGORITHM_MD5, salt);
+        return encryptStringWithSalt(source, SecurityConstants.ALGORITHM_MD5, salt);
     }
 
 
@@ -133,7 +129,7 @@ public class SecurityUtils {
      * @throws NoSuchAlgorithmException 如果MD5算法不存在抛出NoSuchAlgorithmException异常
      */
     public static String encryptBySHA(String source) throws NoSuchAlgorithmException {
-        return encryptString(source, ALGORITHM_SHA);
+        return encryptString(source, SecurityConstants.ALGORITHM_SHA);
     }
 
     /**
@@ -147,7 +143,7 @@ public class SecurityUtils {
      * @throws NoSuchAlgorithmException 如果MD5算法不存在抛出NoSuchAlgorithmException异常
      */
     public static String encryptBySHA(String source, String salt) throws NoSuchAlgorithmException {
-        return encryptStringWithSalt(source, ALGORITHM_SHA, salt);
+        return encryptStringWithSalt(source, SecurityConstants.ALGORITHM_SHA, salt);
     }
 
     /**
@@ -161,7 +157,7 @@ public class SecurityUtils {
      * @throws NoSuchAlgorithmException 如果MD5算法不存在抛出NoSuchAlgorithmException异常
      */
     public static String encryptBySHA256(String source, String salt) throws NoSuchAlgorithmException {
-        return encryptStringWithSalt(source, ALGORITHM__SHA256, salt);
+        return encryptStringWithSalt(source, SecurityConstants.ALGORITHM__SHA256, salt);
     }
 
     /**
@@ -174,7 +170,7 @@ public class SecurityUtils {
      * @throws NoSuchAlgorithmException 如果MD5算法不存在抛出NoSuchAlgorithmException异常
      */
     public static String encryptBySHA256(String source) throws NoSuchAlgorithmException {
-        return encryptString(source, ALGORITHM__SHA256);
+        return encryptString(source, SecurityConstants.ALGORITHM__SHA256);
     }
 
 
@@ -183,7 +179,7 @@ public class SecurityUtils {
      */
     public static KeyPair generateKeyPair() throws Exception {
         // 获取指定算法的密钥对生成器
-        KeyPairGenerator gen = KeyPairGenerator.getInstance(ALGORITHM_RSA);
+        KeyPairGenerator gen = KeyPairGenerator.getInstance(SecurityConstants.ALGORITHM_RSA);
 
         // 初始化密钥对生成器（指定密钥长度, 使用默认的安全随机数源）
         gen.initialize(KEY_SIZE);
@@ -220,7 +216,7 @@ public class SecurityUtils {
         X509EncodedKeySpec encPubKeySpec = new X509EncodedKeySpec(encPubKey);
 
         // 获取指定算法的密钥工厂, 根据 已编码的公钥规格, 生成公钥对象
-        return KeyFactory.getInstance(ALGORITHM_RSA).generatePublic(encPubKeySpec);
+        return KeyFactory.getInstance(SecurityConstants.ALGORITHM_RSA).generatePublic(encPubKeySpec);
     }
 
     /**
@@ -239,7 +235,7 @@ public class SecurityUtils {
         PKCS8EncodedKeySpec encPriKeySpec = new PKCS8EncodedKeySpec(encPriKey);
 
         // 获取指定算法的密钥工厂, 根据 已编码的私钥规格, 生成私钥对象
-        return KeyFactory.getInstance(ALGORITHM_RSA).generatePrivate(encPriKeySpec);
+        return KeyFactory.getInstance(SecurityConstants.ALGORITHM_RSA).generatePrivate(encPriKeySpec);
     }
 
     /**
@@ -253,7 +249,7 @@ public class SecurityUtils {
     public static byte[] encrypt(byte[] plainData, PublicKey pubKey)
         throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException {
         // 获取指定算法的密码器
-        Cipher cipher = Cipher.getInstance(ALGORITHM_RSA);
+        Cipher cipher = Cipher.getInstance(SecurityConstants.ALGORITHM_RSA);
 
         // 初始化密码器（公钥加密模型）
         cipher.init(Cipher.ENCRYPT_MODE, pubKey);
@@ -273,7 +269,7 @@ public class SecurityUtils {
     public static byte[] decrypt(byte[] cipherData, PrivateKey priKey)
         throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         // 获取指定算法的密码器
-        Cipher cipher = Cipher.getInstance(ALGORITHM_RSA);
+        Cipher cipher = Cipher.getInstance(SecurityConstants.ALGORITHM_RSA);
 
         // 初始化密码器（私钥解密模型）
         cipher.init(Cipher.DECRYPT_MODE, priKey);
@@ -292,7 +288,7 @@ public class SecurityUtils {
      */
     public static HashMap<String, Key> readP12Cert(String filePath, String password)
         throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, IOException, CertificateException {
-        KeyStore ks = KeyStore.getInstance(ALGORITHM_PKCS12);
+        KeyStore ks = KeyStore.getInstance(SecurityConstants.ALGORITHM_PKCS12);
         FileInputStream fis = new FileInputStream(filePath);
 
         char[] nPassword = null;
@@ -313,7 +309,6 @@ public class SecurityUtils {
         Certificate cert = ks.getCertificate(keyAlias);
         PublicKey pubkey = cert.getPublicKey();
         HashMap<String, Key> hashMap = new HashMap<>(2);
-        //todo
         hashMap.put("prikey", prikey);
         hashMap.put("pubkey", pubkey);
         return hashMap;

@@ -137,20 +137,7 @@ public class JavaRuntimeInfo implements Serializable {
         return JAVA_CLASS_PATH;
     }
 
-    /**
-     * 取得当前JRE的系统classpath（取自系统属性：<code>java.class.path</code>）。
-     *
-     * <p>
-     * 例如：<code>"/home/admin/myclasses:/home/admin/..."</code>
-     * </p>
-     *
-     * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
-     * @since Java 1.1
-     */
-    public final String[] getClassPathArray() {
-        //return StrUtil.split(getClassPath(), SystemUtil.get("path.separator", false));
-        return null;
-    }
+
 
     /**
      * 取得当前JRE的class文件格式的版本（取自系统属性：<code>java.class.version</code>）。
@@ -179,19 +166,6 @@ public class JavaRuntimeInfo implements Serializable {
         return JAVA_LIBRARY_PATH;
     }
 
-    /**
-     * 取得当前JRE的library搜索路径（取自系统属性：<code>java.library.path</code>）。
-     *
-     * <p>
-     * 例如Sun JDK 1.4.2：<code>"/opt/jdk1.4.2/bin:..."</code>
-     * </p>
-     *
-     * @return 属性值，如果不能取得（因为Java安全限制）或值不则返存在，回<code>null</code>。
-     */
-    public final String[] getLibraryPathArray() {
-        //return StrUtil.split(getLibraryPath(), SystemUtil.get("path.separator", false));
-        return null;
-    }
 
     /**
      * 取得当前JRE的URL协议packages列表（取自系统属性：<code>java.library.path</code>）。
